@@ -198,6 +198,53 @@ namespace Alex_zigendanzetu
                         // 一致した場合
                         if (logInfo.logLine.Contains(kvp.Value))
                         {
+                            int number = kvp.Key;
+                            terop.pictureBox1.Image = GetImageFile(number);
+                            terop.pictureBox1.Visible = true;
+                            terop.Show();
+                            switch (number)
+                            {
+                                case 1:
+
+                                    break;
+
+                                case 2:
+                                    
+
+                                    break;
+
+                                case 3:
+
+                                    break;
+
+                                case 4:
+
+
+                                    break;
+
+                                case 5:
+
+                                    break;
+
+                                case 6:
+
+
+                                    break;
+
+                                case 7:
+
+
+                                    break;
+
+                                case 8:
+
+
+                                    break;
+                                default:
+                                    break;
+                            }
+
+
 
                             次元startFlg = false;
                             break;
@@ -212,6 +259,13 @@ namespace Alex_zigendanzetu
 
 
         }
+
+        private Image GetImageFile(int number)
+        {
+            string imgPth = textBox1_path_init.Text + number.ToString() + "\\1.jpg";
+            return Image.FromFile(@imgPth);
+        }
+
 
         /// <summary>
         /// 戦闘開始時のイベント
