@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Advanced_Combat_Tracker;
 
@@ -257,6 +258,25 @@ namespace Alex_zigendanzetu
 
             // -------------------------- 次元断絶の処理 --------------------------
 
+
+            // -------------------------- 未来観測α --------------------------
+            if (logInfo.logLine.Contains("は「未来観測α」の構え。"))
+            {
+                string str1 = "[00:35:47.000] 03:4000A4B6:Added new combatant .  Job: Mnk Level: 80 Max HP: 148000 Max MP: 0 Pos:...";
+                Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: ([A-Za-z]{3}) Level: 80 .*");
+                string temp = "";
+
+
+                if (regex.IsMatch(str1))
+                {
+                    Console.WriteLine("true");
+                    temp = regex.Replace(str1, "$1");
+                }
+
+
+
+            }
+            // -------------------------- 未来観測α --------------------------
 
         }
 
