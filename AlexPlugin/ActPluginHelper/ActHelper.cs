@@ -112,6 +112,22 @@
             }
             return "nonNameError";
         }
+        public static string MyJob()
+        {
+            if (Initialize())
+            {
+                if (DataRepository.GetCurrentFFXIVProcess().ProcessName == null)
+                {
+                    return "nonJob";
+                }
+                dynamic list = DataRepository.GetCombatantList();
+                foreach (dynamic item in list)
+                {
+                    return Job.Instance.GetJobName((int)item.Job);
+                }
+            }
+            return "nonJob";
+        }
 
 
         public static List<Combatant> GetCombatantList()

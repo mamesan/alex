@@ -14,7 +14,7 @@ namespace ActPluginHelper
         public static void GetMobInfo(string FileName, string FileOutPutPath)
         {
             // ファイルを出力する
-            FilePush(createCombartList(), FileName, FileOutPutPath);
+            FilePush(CreateCombartList(), FileName, FileOutPutPath);
 
         }
         /// <summary>
@@ -45,7 +45,7 @@ namespace ActPluginHelper
             }
             Path = Path + i + ".txt";
 
-            string OutPutString = createMobInfoString(CombertBeanList);
+            string OutPutString = CreateMobInfoString(CombertBeanList);
 
             // UTF - 8で書き込む
             //書き込むファイルが既に存在している場合は、上書きする
@@ -83,7 +83,7 @@ namespace ActPluginHelper
             return false;
         }
 
-        public static string createMobInfoString(List<CombertBean> CombertBeanList)
+        public static string CreateMobInfoString(List<CombertBean> CombertBeanList)
         {
             string OutPutString = "";
             string 改行 = "\r\n";
@@ -107,7 +107,7 @@ namespace ActPluginHelper
             return OutPutString;
         }
 
-        public static List<CombertBean> createCombartList()
+        public static List<CombertBean> CreateCombartList()
         {
 
             dynamic list = ActHelper.GetCombatantList();
@@ -155,7 +155,7 @@ namespace ActPluginHelper
         }
 
     }
-    class CombertBean
+    public class CombertBean
     {
         public String Name;
         public int MaxHp;

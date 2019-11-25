@@ -23,6 +23,11 @@ namespace Alex_zigendanzetu
         private Dictionary<int, string> リミッターカットdic = new Dictionary<int, string>();
         private bool 次元startFlg = false;
 
+        // 未来観測α設定用の変数
+        private bool 未来確定αflg = false;
+        private string MyJobName = "";
+        private string LogMyJobName = "";
+
 
         public zigendanzetu()
         {
@@ -145,6 +150,10 @@ namespace Alex_zigendanzetu
         /// <param name="logInfo"></param>
         private void OFormActMain_OnLogLineRead(bool isImport, LogLineEventArgs logInfo)
         {
+            try
+            {
+
+
             // 18文字以下のログは読み捨てる
             // なぜならば、タイムスタンプ＋ログタイプのみのログだから
             if (logInfo.logLine.Length <= 18)
@@ -157,7 +166,9 @@ namespace Alex_zigendanzetu
             {
                 // 戦闘前の初期処理
                 initButtoleFlg = true;
+                未来確定αflg = false;
                 MyName = ActPluginHelper.ActHelper.MyName();
+                MyJobName = ActPluginHelper.ActHelper.MyJob();
 
                 formInit();
 
@@ -181,103 +192,38 @@ namespace Alex_zigendanzetu
                 // 次元断絶用の処理
                 次元startFlg = false;
             }
-            // -------------------------- 戦闘終了時の処理 --------------------------
-
-            // -------------------------- 次元断絶の処理 --------------------------
-            if (logInfo.logLine.Contains("アレキサンダー・プライムは「次元断絶のマーチ」の構え。"))
-            {
-                次元startFlg = true;
-            }
-            if (次元startFlg)
-            {
-                // 自分の名前がlogに存在している場合のみ確認する
-                if (logInfo.logLine.Contains(MyName))
-                {
-                    // logから、リミカの番号を確認する
-                    foreach (KeyValuePair<int, string> kvp in リミッターカットdic)
-                    {
-                        // 一致した場合
-                        if (logInfo.logLine.Contains(kvp.Value))
-                        {
-                            int number = kvp.Key;
-                            terop.pictureBox1.Image = GetImageFile(number);
-                            terop.pictureBox1.Visible = true;
-                            terop.Show();
-                            switch (number)
-                            {
-                                case 1:
-
-                                    break;
-
-                                case 2:
-                                    
-
-                                    break;
-
-                                case 3:
-
-                                    break;
-
-                                case 4:
-
-
-                                    break;
-
-                                case 5:
-
-                                    break;
-
-                                case 6:
-
-
-                                    break;
-
-                                case 7:
-
-
-                                    break;
-
-                                case 8:
-
-
-                                    break;
-                                default:
-                                    break;
-                            }
-
-
-
-                            次元startFlg = false;
-                            break;
-                        }
-
-                    }
-                }
-            }
-
-
-            // -------------------------- 次元断絶の処理 --------------------------
+                // -------------------------- 戦闘終了時の処理 --------------------------
 
 
             // -------------------------- 未来観測α --------------------------
             if (logInfo.logLine.Contains("は「未来観測α」の構え。"))
             {
-                string str1 = "[00:35:47.000] 03:4000A4B6:Added new combatant .  Job: Mnk Level: 80 Max HP: 148000 Max MP: 0 Pos:...";
-                Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: ([A-Za-z]{3}) Level: 80 .*");
-                string temp = "";
-
-
-                if (regex.IsMatch(str1))
+                未来確定αflg = true;
+            }
+            if (未来確定αflg) { 
+                Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: " + MyJobName + " Level: 80 .*");
+                if (regex.IsMatch(logInfo.logLine))
                 {
-                    Console.WriteLine("true");
-                    temp = regex.Replace(str1, "$1");
+                    LogMyJobName = regex.Replace(logInfo.logLine, "$1");
                 }
 
+                // 定数が取れた場合のみ、処理に入れる
+                if (!string.IsNullOrEmpty(LogMyJobName))
+                {
+                    // ここで、logとマッチさせる処理を入れる
+                    if (logInfo.logLine.Contains(LogMyJobName))
+                    {
 
+                    }
+                }
 
             }
             // -------------------------- 未来観測α --------------------------
-
+            }
+            catch (Exception)
+            {
+                // エラーをすべて握りつぶす
+            }
         }
 
         private Image GetImageFile(int number)
