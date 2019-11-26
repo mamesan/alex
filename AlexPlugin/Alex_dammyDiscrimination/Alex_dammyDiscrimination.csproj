@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DammyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DammyForm.Designer.cs">
+      <DependentUpon>DammyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="dammyMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -60,6 +66,11 @@
       <Project>{78e02051-4203-49d2-b985-67e5379965e9}</Project>
       <Name>ActPluginHelper</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DammyForm.resx">
+      <DependentUpon>DammyForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
