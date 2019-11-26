@@ -37,7 +37,7 @@ namespace Alex_zigendanzetu
 
         public void DeInitPlugin()
         {
-            ActPluginHelper.ACTInitSetting.SaveSettings(xmlSettings,PluginName);
+            ActPluginHelper.ACTInitSetting.SaveSettings(xmlSettings, PluginName);
         }
 
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
@@ -154,71 +154,72 @@ namespace Alex_zigendanzetu
             {
 
 
-            // 18文字以下のログは読み捨てる
-            // なぜならば、タイムスタンプ＋ログタイプのみのログだから
-            if (logInfo.logLine.Length <= 18)
-            {
-                return;
-            }
-            // -------------------------- 戦闘開始時の処理 --------------------------
-            // 戦闘開始のお知らせ
-            if (combatFlg && !initButtoleFlg)
-            {
-                // 戦闘前の初期処理
-                initButtoleFlg = true;
-                未来確定αflg = false;
-                MyName = ActPluginHelper.ActHelper.MyName();
-                MyJobName = ActPluginHelper.ActHelper.MyJob();
-
-                formInit();
-
-                // 次元断絶用の処理
-                if (!string.IsNullOrEmpty(textBox1_path_init.Text) &&
-                    ActPluginHelper.FileOutPut.checkDirectory(textBox1_path_init.Text))
+                // 18文字以下のログは読み捨てる
+                // なぜならば、タイムスタンプ＋ログタイプのみのログだから
+                if (logInfo.logLine.Length <= 18)
                 {
+                    return;
+                }
+                // -------------------------- 戦闘開始時の処理 --------------------------
+                // 戦闘開始のお知らせ
+                if (combatFlg && !initButtoleFlg)
+                {
+                    // 戦闘前の初期処理
+                    initButtoleFlg = true;
+                    未来確定αflg = false;
+                    MyName = ActPluginHelper.ActHelper.MyName();
+                    MyJobName = ActPluginHelper.ActHelper.MyJob();
+
+                    formInit();
+
+                    // 次元断絶用の処理
+                    if (!string.IsNullOrEmpty(textBox1_path_init.Text) &&
+                        ActPluginHelper.FileOutPut.checkDirectory(textBox1_path_init.Text))
+                    {
+                        次元startFlg = false;
+                    }
+                }
+                // -------------------------- 戦闘開始時の処理 --------------------------
+
+                // -------------------------- 戦闘終了時の処理 --------------------------
+                // 戦闘終了時
+                if (!combatFlg && initButtoleFlg)
+                {
+                    initButtoleFlg = false;
+
+                    formInit();
+
+                    // 次元断絶用の処理
                     次元startFlg = false;
                 }
-            }
-            // -------------------------- 戦闘開始時の処理 --------------------------
-
-            // -------------------------- 戦闘終了時の処理 --------------------------
-            // 戦闘終了時
-            if (!combatFlg && initButtoleFlg)
-            {
-                initButtoleFlg = false;
-
-                formInit();
-
-                // 次元断絶用の処理
-                次元startFlg = false;
-            }
                 // -------------------------- 戦闘終了時の処理 --------------------------
 
 
-            // -------------------------- 未来観測α --------------------------
-            if (logInfo.logLine.Contains("は「未来観測α」の構え。"))
-            {
-                未来確定αflg = true;
-            }
-            if (未来確定αflg) { 
-                Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: " + MyJobName + " Level: 80 .*");
-                if (regex.IsMatch(logInfo.logLine))
+                // -------------------------- 未来観測α --------------------------
+                if (logInfo.logLine.Contains("は「未来観測α」の構え。"))
                 {
-                    LogMyJobName = regex.Replace(logInfo.logLine, "$1");
+                    未来確定αflg = true;
                 }
-
-                // 定数が取れた場合のみ、処理に入れる
-                if (!string.IsNullOrEmpty(LogMyJobName))
+                if (未来確定αflg)
                 {
-                    // ここで、logとマッチさせる処理を入れる
-                    if (logInfo.logLine.Contains(LogMyJobName))
+                    Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: " + MyJobName + " Level: 80 .*");
+                    if (regex.IsMatch(logInfo.logLine))
                     {
-
+                        LogMyJobName = regex.Replace(logInfo.logLine, "$1");
                     }
-                }
 
-            }
-            // -------------------------- 未来観測α --------------------------
+                    // 定数が取れた場合のみ、処理に入れる
+                    if (!string.IsNullOrEmpty(LogMyJobName))
+                    {
+                        // ここで、logとマッチさせる処理を入れる
+                        if (logInfo.logLine.Contains(LogMyJobName))
+                        {
+
+                        }
+                    }
+
+                }
+                // -------------------------- 未来観測α --------------------------
             }
             catch (Exception)
             {

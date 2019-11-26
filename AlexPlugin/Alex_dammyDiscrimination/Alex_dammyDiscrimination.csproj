@@ -32,7 +32,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Advanced Combat Tracker">
-      <HintPath>..\..\..\AbsoluteAlexander_MaliktenderOnly\AbsoluteAlexander_MaliktenderOnly\AbsoluteAlexander_MaliktenderOnly\lib\Advanced Combat Tracker.exe</HintPath>
+      <HintPath>D:\Actor_v2.0.4.2\ACT\Advanced Combat Tracker.exe</HintPath>
+    </Reference>
+    <Reference Include="FFXIV_ACT_Plugin.Common, Version=2.0.2.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\FFXIV_ACT_Plugin.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,12 +50,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActPluginHelper\ActHelper.cs" />
+    <Compile Include="ActPluginHelper\ACTInitSetting.cs" />
+    <Compile Include="ActPluginHelper\ActInvoker.cs" />
+    <Compile Include="ActPluginHelper\DefMember.cs" />
+    <Compile Include="ActPluginHelper\FileOutPut.cs" />
+    <Compile Include="ActPluginHelper\Job.cs" />
+    <Compile Include="ActPluginHelper\OutLog.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DammyForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DammyForm.Designer.cs">
       <DependentUpon>DammyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DammyForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DammyForm2.Designer.cs">
+      <DependentUpon>DammyForm2.cs</DependentUpon>
     </Compile>
     <Compile Include="dammyMain.cs">
       <SubType>UserControl</SubType>
@@ -60,17 +77,30 @@
       <DependentUpon>dammyMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ActPluginHelper\ActPluginHelper.csproj">
-      <Project>{78e02051-4203-49d2-b985-67e5379965e9}</Project>
-      <Name>ActPluginHelper</Name>
-    </ProjectReference>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DammyForm.resx">
       <DependentUpon>DammyForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DammyForm2.resx">
+      <DependentUpon>DammyForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dammyMain.resx">
+      <DependentUpon>dammyMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\ActPluginHelper.dll" />
+    <Content Include="lib\FFXIV_ACT_Plugin.Common.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
