@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActPluginHelper", "ActPlugi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alex_zigendanzetu", "Alex_zigendanzetu\Alex_zigendanzetu.csproj", "{8D1729C5-515D-4775-8949-BDDFDA81DF3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alex_dammyDiscrimination", "Alex_dammyDiscrimination\Alex_dammyDiscrimination.csproj", "{4918E546-92C4-4BF5-8383-583AEB721281}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8D1729C5-515D-4775-8949-BDDFDA81DF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D1729C5-515D-4775-8949-BDDFDA81DF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D1729C5-515D-4775-8949-BDDFDA81DF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4918E546-92C4-4BF5-8383-583AEB721281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4918E546-92C4-4BF5-8383-583AEB721281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4918E546-92C4-4BF5-8383-583AEB721281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4918E546-92C4-4BF5-8383-583AEB721281}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
