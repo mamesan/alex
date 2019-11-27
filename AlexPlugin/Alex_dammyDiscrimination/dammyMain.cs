@@ -135,10 +135,17 @@ namespace Alex_dammyDiscrimination
 
             // フォームの初期化
             formInit();
-            Bairitu未来観測Setting();
-            BairituアレキビームSetting();
-            dammyForm2.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
-            dammyForm.Location = SettingPoint(textBox_arekibimuzahyoX_init, textBox_arekibimuzahyoY_init);
+            try
+            {
+                Bairitu未来観測Setting();
+                BairituアレキビームSetting();
+                dammyForm2.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
+                dammyForm.Location = SettingPoint(textBox_arekibimuzahyoX_init, textBox_arekibimuzahyoY_init);
+            }
+            catch
+            {
+
+            }
 
         }
 
@@ -579,32 +586,12 @@ namespace Alex_dammyDiscrimination
 
                 // -------------------------- 未来観測β --------------------------
                 // 要調整
-                if (logInfo.logLine.Contains("は「未来観測β」の構え。"))
+                if (logInfo.logLine.Contains("は「未来観測β」の構え。") && false)
                 {
                     未来確定βflg = true;
                 }
                 if (未来確定βflg)
                 {
-                    // 要調整
-                    if (false)
-                    {
-
-                        Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: " + MyJobName + " Level: 80 .*");
-                        if (regex.IsMatch(logInfo.logLine))
-                        {
-                            LogMyJobName = regex.Replace(logInfo.logLine, "$1");
-                        }
-
-                        // 定数が取れた場合のみ、処理に入れる
-                        if (!string.IsNullOrEmpty(LogMyJobName))
-                        {
-                            // ここで、logとマッチさせる処理を入れる
-                            if (logInfo.logLine.Contains(LogMyJobName))
-                            {
-
-                            }
-                        }
-                    }
 
                     // ダミーアレキ判定用
                     if (logInfo.logLine.Contains("489E:Unknown_489E"))
@@ -760,6 +747,10 @@ namespace Alex_dammyDiscrimination
         private void BairituアレキビームSetting()
         {
             listBox_arekibimubairitu_text_init.Text = listBox_arekibimubairitu_init.Text;
+            if (listBox_arekibimubairitu_text_init.Text == null)
+            {
+                listBox_arekibimubairitu_text_init.Text = "1倍";
+            }
 
             double bairitsu = double.Parse(listBox_arekibimubairitu_text_init.Text.ToString().Replace("倍", ""));
 
@@ -858,7 +849,10 @@ namespace Alex_dammyDiscrimination
         private void Bairitu未来観測Setting()
         {
             listBox_miraikansokubairitu_text_init.Text = listBox_miraikansokubairitu_init.Text;
-
+            if (listBox_miraikansokubairitu_text_init.Text == null)
+            {
+                listBox_arekibimubairitu_text_init.Text = "1倍";
+            }
             double bairitsu = double.Parse(listBox_miraikansokubairitu_text_init.Text.ToString().Replace("倍", ""));
 
             dammyForm2.Size = new Size((int)(dammyForm2Size.Width * bairitsu), (int)(dammyForm2Size.Height * bairitsu));

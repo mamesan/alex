@@ -38,8 +38,10 @@
             this.listBox_arekibimubairitu_init = new System.Windows.Forms.ComboBox();
             this.textBox_arekibimuzahyoY_init = new System.Windows.Forms.TextBox();
             this.textBox_arekibimuzahyoX_init = new System.Windows.Forms.TextBox();
+            this.checkBox1_arekibimugazou_init = new System.Windows.Forms.CheckBox();
             this.checkBox1_arekibimu_init = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.checkBox1_miraikansokugazou_init = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,8 +53,7 @@
             this.textBox_miraikansokuzahyoY_init = new System.Windows.Forms.TextBox();
             this.textBox_miraikansokuzahyoX_init = new System.Windows.Forms.TextBox();
             this.checkBox1_miraikansokucheck_init = new System.Windows.Forms.CheckBox();
-            this.checkBox1_arekibimugazou_init = new System.Windows.Forms.CheckBox();
-            this.checkBox1_miraikansokugazou_init = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tab.SuspendLayout();
             this.アレキビーム判定.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -187,6 +188,19 @@
             this.textBox_arekibimuzahyoX_init.Text = "100";
             this.textBox_arekibimuzahyoX_init.TextChanged += new System.EventHandler(this.textBox_アレキビームzahyoX_init_TextChanged);
             // 
+            // checkBox1_arekibimugazou_init
+            // 
+            this.checkBox1_arekibimugazou_init.AutoSize = true;
+            this.checkBox1_arekibimugazou_init.Checked = true;
+            this.checkBox1_arekibimugazou_init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1_arekibimugazou_init.Font = new System.Drawing.Font("Meiryo UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.checkBox1_arekibimugazou_init.Location = new System.Drawing.Point(131, 26);
+            this.checkBox1_arekibimugazou_init.Name = "checkBox1_arekibimugazou_init";
+            this.checkBox1_arekibimugazou_init.Size = new System.Drawing.Size(184, 28);
+            this.checkBox1_arekibimugazou_init.TabIndex = 0;
+            this.checkBox1_arekibimugazou_init.Text = "画像のみを利用する";
+            this.checkBox1_arekibimugazou_init.UseVisualStyleBackColor = true;
+            // 
             // checkBox1_arekibimu_init
             // 
             this.checkBox1_arekibimu_init.AutoSize = true;
@@ -205,6 +219,7 @@
             this.tabPage2.Controls.Add(this.checkBox1_miraikansokugazou_init);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.textBox_未来観測位置確認);
             this.tabPage2.Controls.Add(this.listBox_miraikansokubairitu_text_init);
@@ -221,6 +236,19 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "未来観測α";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1_miraikansokugazou_init
+            // 
+            this.checkBox1_miraikansokugazou_init.AutoSize = true;
+            this.checkBox1_miraikansokugazou_init.Checked = true;
+            this.checkBox1_miraikansokugazou_init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1_miraikansokugazou_init.Font = new System.Drawing.Font("Meiryo UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.checkBox1_miraikansokugazou_init.Location = new System.Drawing.Point(206, 19);
+            this.checkBox1_miraikansokugazou_init.Name = "checkBox1_miraikansokugazou_init";
+            this.checkBox1_miraikansokugazou_init.Size = new System.Drawing.Size(184, 28);
+            this.checkBox1_miraikansokugazou_init.TabIndex = 79;
+            this.checkBox1_miraikansokugazou_init.Text = "画像のみを利用する";
+            this.checkBox1_miraikansokugazou_init.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -342,8 +370,7 @@
             // checkBox1_miraikansokucheck_init
             // 
             this.checkBox1_miraikansokucheck_init.AutoSize = true;
-            this.checkBox1_miraikansokucheck_init.Checked = true;
-            this.checkBox1_miraikansokucheck_init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1_miraikansokucheck_init.Enabled = false;
             this.checkBox1_miraikansokucheck_init.Font = new System.Drawing.Font("Meiryo UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.checkBox1_miraikansokucheck_init.Location = new System.Drawing.Point(19, 19);
             this.checkBox1_miraikansokucheck_init.Name = "checkBox1_miraikansokucheck_init";
@@ -351,32 +378,17 @@
             this.checkBox1_miraikansokucheck_init.TabIndex = 1;
             this.checkBox1_miraikansokucheck_init.Text = "ご利用";
             this.checkBox1_miraikansokucheck_init.UseVisualStyleBackColor = true;
+            this.checkBox1_miraikansokucheck_init.Visible = false;
             // 
-            // checkBox1_arekibimugazou_init
+            // label4
             // 
-            this.checkBox1_arekibimugazou_init.AutoSize = true;
-            this.checkBox1_arekibimugazou_init.Checked = true;
-            this.checkBox1_arekibimugazou_init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1_arekibimugazou_init.Font = new System.Drawing.Font("Meiryo UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.checkBox1_arekibimugazou_init.Location = new System.Drawing.Point(131, 26);
-            this.checkBox1_arekibimugazou_init.Name = "checkBox1_arekibimugazou_init";
-            this.checkBox1_arekibimugazou_init.Size = new System.Drawing.Size(184, 28);
-            this.checkBox1_arekibimugazou_init.TabIndex = 0;
-            this.checkBox1_arekibimugazou_init.Text = "画像のみを利用する";
-            this.checkBox1_arekibimugazou_init.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1_miraikansokugazou_init
-            // 
-            this.checkBox1_miraikansokugazou_init.AutoSize = true;
-            this.checkBox1_miraikansokugazou_init.Checked = true;
-            this.checkBox1_miraikansokugazou_init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1_miraikansokugazou_init.Font = new System.Drawing.Font("Meiryo UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.checkBox1_miraikansokugazou_init.Location = new System.Drawing.Point(206, 19);
-            this.checkBox1_miraikansokugazou_init.Name = "checkBox1_miraikansokugazou_init";
-            this.checkBox1_miraikansokugazou_init.Size = new System.Drawing.Size(184, 28);
-            this.checkBox1_miraikansokugazou_init.TabIndex = 79;
-            this.checkBox1_miraikansokugazou_init.Text = "画像のみを利用する";
-            this.checkBox1_miraikansokugazou_init.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label4.Location = new System.Drawing.Point(76, 230);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(171, 61);
+            this.label4.TabIndex = 77;
+            this.label4.Text = "調整中";
             // 
             // dammyMain
             // 
@@ -421,5 +433,6 @@
         private System.Windows.Forms.TextBox textBox1_job_init;
         private System.Windows.Forms.CheckBox checkBox1_arekibimugazou_init;
         private System.Windows.Forms.CheckBox checkBox1_miraikansokugazou_init;
+        private System.Windows.Forms.Label label4;
     }
 }
