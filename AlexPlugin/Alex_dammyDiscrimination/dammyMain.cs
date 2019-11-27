@@ -14,7 +14,6 @@ namespace Alex_dammyDiscrimination
 {
     public partial class dammyMain : UserControl, IActPluginV1
     {
-        private static readonly string PluginName = "Alex_dammyDiscrimination";
         private SettingsSerializer xmlSettings;
         private bool combatFlg = false;
         private bool initButtoleFlg = false;
@@ -60,7 +59,7 @@ namespace Alex_dammyDiscrimination
 
         public void DeInitPlugin()
         {
-            ACTInitSetting.SaveSettings(xmlSettings, PluginName);
+            ACTInitSetting.SaveSettings(xmlSettings);
             dammyForm.Hide();
             dammyForm.Close();
             dammyForm2.Hide();
@@ -94,7 +93,7 @@ namespace Alex_dammyDiscrimination
             }
 
             // 設定ファイルを読み込む
-            ACTInitSetting.LoadSettings(xmlSettings, PluginName);
+            ACTInitSetting.LoadSettings(xmlSettings);
 
 
             dammyAlex = new Dictionary<int, string>();
@@ -132,8 +131,14 @@ namespace Alex_dammyDiscrimination
             dammyForm2Size = new Size(390, 220);
             dammyForm2pictureBoxSize = new Size(185, 185);
 
+
+
             // フォームの初期化
             formInit();
+            Bairitu未来観測Setting();
+            BairituアレキビームSetting();
+            dammyForm2.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
+            dammyForm.Location = SettingPoint(textBox_arekibimuzahyoX_init, textBox_arekibimuzahyoY_init);
 
         }
 
@@ -239,8 +244,8 @@ namespace Alex_dammyDiscrimination
                 {
                     // 戦闘前の初期処理
                     initButtoleFlg = true;
-                    //MyJobName = ActHelper.MyJob();
-                    MyJobName = textBox1_job_init.Text;
+                    MyJobName = ActHelper.MyJob();
+                    //MyJobName = textBox1_job_init.Text;
 
                     // 未来観測α用
                     dammyList = new List<int>();
@@ -419,7 +424,7 @@ namespace Alex_dammyDiscrimination
                                 dammyForm2.pictureBox12.Visible = false;
                             }
                             // 自分が名誉罰の場合の処理
-                            else 
+                            else
                             {
                                 TTSString += "めいよかむしょく";
                                 dammyForm2.pictureBox3.Visible = true; // 名誉
@@ -803,7 +808,7 @@ namespace Alex_dammyDiscrimination
         {
             try
             {
-                dammyForm.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
+                dammyForm2.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
             }
             catch
             { }
@@ -813,7 +818,7 @@ namespace Alex_dammyDiscrimination
         {
             try
             {
-                dammyForm.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
+                dammyForm2.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
             }
             catch
             { }
