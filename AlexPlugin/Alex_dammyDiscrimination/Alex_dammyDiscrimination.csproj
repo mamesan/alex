@@ -57,7 +57,6 @@
     <Compile Include="ActPluginHelper\FileOutPut.cs" />
     <Compile Include="ActPluginHelper\Job.cs" />
     <Compile Include="ActPluginHelper\OutLog.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="DammyForm.cs">
       <SubType>Form</SubType>
     </Compile>

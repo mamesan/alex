@@ -133,7 +133,7 @@ namespace Alex_dammyDiscrimination
             dammyFormSize = new Size(364, 376);
             dammyFormpictureBoxSize = new Size(350, 350);
 
-            dammyForm2Size = new Size(362, 219);
+            dammyForm2Size = new Size(390, 220);
             dammyForm2pictureBoxSize = new Size(185, 185);
 
             // フォームの初期化
@@ -244,7 +244,7 @@ namespace Alex_dammyDiscrimination
                     // 戦闘前の初期処理
                     initButtoleFlg = true;
                     //MyJobName = ActHelper.MyJob();
-                    MyJobName = textBox1_job.Text;
+                    MyJobName = textBox1_job_init.Text;
 
                     // 未来観測α用
                     dammyList = new List<int>();
@@ -320,6 +320,7 @@ namespace Alex_dammyDiscrimination
                             Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::48A5:Unknown_48A5.*");
                             加重罰List.Add(regex.Replace(logInfo.logLine, "$1"));
                         }
+                        /*
                         // 名誉罰
                         else if (logInfo.logLine.Contains("489A:Unknown_489A"))
                         {
@@ -337,9 +338,10 @@ namespace Alex_dammyDiscrimination
                             名誉罰用flg = false;
                             αStopFlg = true;
                         }
+                        */
 
                         // 集団罰・加重罰が付いた場合は、即処理を中断する
-                        if (集団罰List.Contains(LogMyJobName) || 加重罰List.Contains(LogMyJobName))
+                        if (集団罰List.Count == 1 && 加重罰List.Count == 3)
                         {
                             αStopFlg = true;
                         }
@@ -406,28 +408,13 @@ namespace Alex_dammyDiscrimination
                                 dammyForm2.pictureBox12.Visible = false;
                             }
                             // 自分が名誉罰の場合の処理
-                            else if (名誉罰List.Contains(LogMyJobName))
+                            else 
                             {
-                                TTSString += "めいよばつ";
-                                dammyForm2.pictureBox3.Visible = true;
+                                TTSString += "めいよかむしょく";
+                                dammyForm2.pictureBox3.Visible = true; // 名誉
                                 dammyForm2.pictureBox4.Visible = false;
                                 dammyForm2.pictureBox5.Visible = false;
-                                dammyForm2.pictureBox6.Visible = false;
-                                dammyForm2.pictureBox7.Visible = false;
-                                dammyForm2.pictureBox8.Visible = false;
-                                dammyForm2.pictureBox9.Visible = false;
-                                dammyForm2.pictureBox10.Visible = false;
-                                dammyForm2.pictureBox11.Visible = false;
-                                dammyForm2.pictureBox12.Visible = false;
-                            }
-                            // どれにも入っていなかったら、無職
-                            else
-                            {
-                                TTSString += "むしょく";
-                                dammyForm2.pictureBox3.Visible = false;
-                                dammyForm2.pictureBox4.Visible = false;
-                                dammyForm2.pictureBox5.Visible = false;
-                                dammyForm2.pictureBox6.Visible = true;
+                                dammyForm2.pictureBox6.Visible = false;　// 無色
                                 dammyForm2.pictureBox7.Visible = false;
                                 dammyForm2.pictureBox8.Visible = false;
                                 dammyForm2.pictureBox9.Visible = false;
@@ -436,12 +423,15 @@ namespace Alex_dammyDiscrimination
                                 dammyForm2.pictureBox12.Visible = false;
                             }
 
-                            //ActGlobals.oFormActMain.TTS(TTSString);
+                            if (!checkBox1_miraikansokugazou_init.Checked)
+                            {
+                                ActGlobals.oFormActMain.TTS(TTSString);
+                            }
                         }
                     }
 
                     // ダミーアレキ観測
-                    if (checkBox1_十字_init.Checked)
+                    if (checkBox1_arekibimu_init.Checked)
                     {
 
                         // ダミーアレキ判定用
@@ -545,7 +535,10 @@ namespace Alex_dammyDiscrimination
                                     break;
                             }
                             // 読上げを実施する
-                            //ActGlobals.oFormActMain.TTS(TTSstr);
+                            if (!checkBox1_arekibimugazou_init.Checked)
+                            {
+                                ActGlobals.oFormActMain.TTS(TTSstr);
+                            }
                             dammyList = new List<int>();
                             dammyList.Add(1);
                             dammyList.Add(2);
@@ -570,7 +563,7 @@ namespace Alex_dammyDiscrimination
 
                 // -------------------------- 未来観測β --------------------------
                 // 要調整
-                if (logInfo.logLine.Contains("は「未来観測β」の構え。"))
+                if (logInfo.logLine.Contains("は「未来観測β」の構え。") && false)
                 {
                     未来確定βflg = true;
                 }
@@ -698,7 +691,10 @@ namespace Alex_dammyDiscrimination
                                 break;
                         }
                         // 読上げを実施する
-                        //ActGlobals.oFormActMain.TTS(TTSstr);
+                        if (!checkBox1_arekibimugazou_init.Checked)
+                        {
+                            ActGlobals.oFormActMain.TTS(TTSstr);
+                        }
                         dammyList2 = new List<int>();
                         dammyList2.Add(1);
                         dammyList2.Add(2);
@@ -726,7 +722,7 @@ namespace Alex_dammyDiscrimination
         {
             try
             {
-                dammyForm.Location = SettingPoint(textBox_アレキビームzahyoX_init, textBox_アレキビームzahyoY_init);
+                dammyForm.Location = SettingPoint(textBox_arekibimuzahyoX_init, textBox_arekibimuzahyoY_init);
             }
             catch
             { }
@@ -736,7 +732,7 @@ namespace Alex_dammyDiscrimination
         {
             try
             {
-                dammyForm.Location = SettingPoint(textBox_アレキビームzahyoX_init, textBox_アレキビームzahyoY_init);
+                dammyForm.Location = SettingPoint(textBox_arekibimuzahyoX_init, textBox_arekibimuzahyoY_init);
             }
             catch
             { }
@@ -748,9 +744,9 @@ namespace Alex_dammyDiscrimination
         }
         private void BairituアレキビームSetting()
         {
-            listBox_アレキビーム倍率_text_init.Text = listBox_アレキビーム倍率_init.Text;
+            listBox_arekibimubairitu_text_init.Text = listBox_arekibimubairitu_init.Text;
 
-            double bairitsu = double.Parse(listBox_アレキビーム倍率_text_init.Text.ToString().Replace("倍", ""));
+            double bairitsu = double.Parse(listBox_arekibimubairitu_text_init.Text.ToString().Replace("倍", ""));
 
             dammyForm.Size = new Size((int)(dammyFormSize.Width * bairitsu), (int)(dammyFormSize.Height * bairitsu));
             dammyForm.pictureBox1.Size = new Size((int)(dammyFormpictureBoxSize.Width * bairitsu), (int)(dammyFormpictureBoxSize.Height * bairitsu));
@@ -772,8 +768,8 @@ namespace Alex_dammyDiscrimination
         {
             if (textBox_アレキビーム位置確認.Text == "位置確認")
             {
-                int X = textBox_アレキビームzahyoX_init.Text == "" ? 100 : int.Parse(textBox_アレキビームzahyoX_init.Text);
-                int Y = textBox_アレキビームzahyoY_init.Text == "" ? 100 : int.Parse(textBox_アレキビームzahyoY_init.Text);
+                int X = textBox_arekibimuzahyoX_init.Text == "" ? 100 : int.Parse(textBox_arekibimuzahyoX_init.Text);
+                int Y = textBox_arekibimuzahyoY_init.Text == "" ? 100 : int.Parse(textBox_arekibimuzahyoY_init.Text);
                 Point point = new Point(X, Y);
                 // 位置を指定してしまう
                 dammyForm.Location = point;
@@ -797,7 +793,7 @@ namespace Alex_dammyDiscrimination
         {
             try
             {
-                dammyForm.Location = SettingPoint(textBox_未来観測zahyoX_init, textBox_未来観測zahyoY_init);
+                dammyForm.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
             }
             catch
             { }
@@ -807,7 +803,7 @@ namespace Alex_dammyDiscrimination
         {
             try
             {
-                dammyForm.Location = SettingPoint(textBox_未来観測zahyoX_init, textBox_未来観測zahyoY_init);
+                dammyForm.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
             }
             catch
             { }
@@ -817,8 +813,8 @@ namespace Alex_dammyDiscrimination
         {
             if (textBox_未来観測位置確認.Text == "位置確認")
             {
-                int X = textBox_未来観測zahyoX_init.Text == "" ? 100 : int.Parse(textBox_未来観測zahyoX_init.Text);
-                int Y = textBox_未来観測zahyoY_init.Text == "" ? 100 : int.Parse(textBox_未来観測zahyoY_init.Text);
+                int X = textBox_miraikansokuzahyoX_init.Text == "" ? 100 : int.Parse(textBox_miraikansokuzahyoX_init.Text);
+                int Y = textBox_miraikansokuzahyoY_init.Text == "" ? 100 : int.Parse(textBox_miraikansokuzahyoY_init.Text);
                 Point point = new Point(X, Y);
                 // 位置を指定してしまう
                 dammyForm2.Location = point;
@@ -844,9 +840,9 @@ namespace Alex_dammyDiscrimination
 
         private void Bairitu未来観測Setting()
         {
-            listBox_未来観測倍率_text_init.Text = listBox_未来観測倍率_init.Text;
+            listBox_miraikansokubairitu_text_init.Text = listBox_miraikansokubairitu_init.Text;
 
-            double bairitsu = double.Parse(listBox_未来観測倍率_text_init.Text.ToString().Replace("倍", ""));
+            double bairitsu = double.Parse(listBox_miraikansokubairitu_text_init.Text.ToString().Replace("倍", ""));
 
             dammyForm2.Size = new Size((int)(dammyForm2Size.Width * bairitsu), (int)(dammyForm2Size.Height * bairitsu));
             dammyForm2.pictureBox1.Size = new Size((int)(dammyForm2pictureBoxSize.Width * bairitsu), (int)(dammyForm2pictureBoxSize.Height * bairitsu));
