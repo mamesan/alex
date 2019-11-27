@@ -27,7 +27,7 @@ namespace Alex_dammyDiscrimination
         private Dictionary<int, string> dammyAlex = new Dictionary<int, string>();
         private Dictionary<int, string> dammyAlex2 = new Dictionary<int, string>();
         private List<int> dammyList = new List<int>();
-        private List<int> dammyList2 = new List<int>();
+        private int dammy拝火 = 0;
         // 加重罰
         private List<string> 加重罰List = new List<string>();
         // 集団罰
@@ -115,11 +115,7 @@ namespace Alex_dammyDiscrimination
             dammyList.Add(3);
             dammyList.Add(4);
 
-            dammyList2 = new List<int>();
-            dammyList2.Add(1);
-            dammyList2.Add(2);
-            dammyList2.Add(3);
-            dammyList2.Add(4);
+            dammy拝火 = 0;
 
             // ログを取得するイベントを生成する
             ActGlobals.oFormActMain.BeforeLogLineRead += OFormActMain_OnLogLineRead;
@@ -252,6 +248,7 @@ namespace Alex_dammyDiscrimination
                     dammyList.Add(2);
                     dammyList.Add(3);
                     dammyList.Add(4);
+                    dammy拝火 = 0;
                     加重罰List = new List<string>();
                     集団罰List = new List<string>();
                     名誉罰List = new List<string>();
@@ -268,6 +265,20 @@ namespace Alex_dammyDiscrimination
                 // 戦闘終了時
                 if (!combatFlg && initButtoleFlg)
                 {
+                    // 未来観測α用
+                    dammyList = new List<int>();
+                    dammyList.Add(1);
+                    dammyList.Add(2);
+                    dammyList.Add(3);
+                    dammyList.Add(4);
+                    dammy拝火 = 0;
+                    加重罰List = new List<string>();
+                    集団罰List = new List<string>();
+                    名誉罰List = new List<string>();
+                    停止命令flg = false;
+                    行動命令flg = false;
+                    名誉罰用flg = false;
+                    αStopFlg = false;
                     initButtoleFlg = false;
 
                     formInit();
@@ -283,7 +294,7 @@ namespace Alex_dammyDiscrimination
                 if (未来確定αflg)
                 {
                     // 定数が取れた場合のみ、処理に入れる
-                    if (string.IsNullOrEmpty(LogMyJobName) && false)
+                    if (string.IsNullOrEmpty(LogMyJobName))
                     {
                         Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: " + MyJobName + " Level: 80 .*");
                         if (regex.IsMatch(logInfo.logLine))
@@ -292,7 +303,7 @@ namespace Alex_dammyDiscrimination
                         }
                     }
                     // 定数が取れた場合のみ、処理に入れる
-                    if (!string.IsNullOrEmpty(LogMyJobName) && !αStopFlg && false)
+                    if (!string.IsNullOrEmpty(LogMyJobName) && !αStopFlg)
                     {
 
                         // 停止命令
@@ -311,7 +322,7 @@ namespace Alex_dammyDiscrimination
                         // 集団罰
                         if (logInfo.logLine.Contains("48A6:Unknown_48A6"))
                         {
-                            Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::48A5:Unknown_48A5.*");
+                            Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::48A6:Unknown_48A6.*");
                             集団罰List.Add(regex.Replace(logInfo.logLine, "$1"));
                         }
                         // 加重罰
@@ -341,7 +352,7 @@ namespace Alex_dammyDiscrimination
                         */
 
                         // 集団罰・加重罰が付いた場合は、即処理を中断する
-                        if (集団罰List.Count == 1 && 加重罰List.Count == 3)
+                        if (集団罰List.Count == 1 && 加重罰List.Count == 3 && (停止命令flg || 行動命令flg))
                         {
                             αStopFlg = true;
                         }
@@ -563,7 +574,7 @@ namespace Alex_dammyDiscrimination
 
                 // -------------------------- 未来観測β --------------------------
                 // 要調整
-                if (logInfo.logLine.Contains("は「未来観測β」の構え。") && false)
+                if (logInfo.logLine.Contains("は「未来観測β」の構え。"))
                 {
                     未来確定βflg = true;
                 }
@@ -588,28 +599,29 @@ namespace Alex_dammyDiscrimination
 
                             }
                         }
+                    }
 
-                        // ダミーアレキ判定用
-                        if (logInfo.logLine.Contains("489E:Unknown_489E"))
+                    // ダミーアレキ判定用
+                    if (logInfo.logLine.Contains("489E:Unknown_489E"))
+                    {
+                        foreach (KeyValuePair<int, string> pair in dammyAlex2)
                         {
-                            foreach (KeyValuePair<int, string> pair in dammyAlex2)
+                            Regex regex2 = new Regex(@pair.Value);
+                            if (regex2.IsMatch(logInfo.logLine))
                             {
-                                Regex regex2 = new Regex(@pair.Value);
-                                if (regex2.IsMatch(logInfo.logLine))
-                                {
-                                    // マッチした場所の番号を除去する
-                                    dammyList2.Remove(pair.Key);
-                                }
+                                // マッチした場所の番号を追加する
+                                dammy拝火 = pair.Key;
+                                break;
                             }
                         }
                     }
 
-                    // リストが残り一つになった場合に処理を実施する
-                    if (dammyList2.Count == 1)
+                    // dammy拝火が0ではなくなった場合、処理を実施する
+                    if (dammy拝火 != 0)
                     {
                         string TTSstr = "";
                         dammyForm.Show();
-                        switch (dammyList2[0])
+                        switch (dammy拝火)
                         {
                             case 1:
                                 TTSstr = "いちばんみぎ";
@@ -641,6 +653,7 @@ namespace Alex_dammyDiscrimination
                                 dammyForm.pictureBox10.Visible = false;
                                 dammyForm.pictureBox11.Visible = false;
                                 dammyForm.pictureBox12.Visible = false;
+
                                 break;
                             case 3:
                                 TTSstr = "ひだりからにばんめ";
@@ -672,6 +685,7 @@ namespace Alex_dammyDiscrimination
                                 dammyForm.pictureBox10.Visible = false;
                                 dammyForm.pictureBox11.Visible = false;
                                 dammyForm.pictureBox12.Visible = false;
+
                                 break;
                             default:
                                 dammyForm.Hide();
@@ -695,11 +709,7 @@ namespace Alex_dammyDiscrimination
                         {
                             ActGlobals.oFormActMain.TTS(TTSstr);
                         }
-                        dammyList2 = new List<int>();
-                        dammyList2.Add(1);
-                        dammyList2.Add(2);
-                        dammyList2.Add(3);
-                        dammyList2.Add(4);
+                        dammy拝火 = 0;
                     }
 
                     if (logInfo.logLine.Contains("拝火の秘蹟"))
@@ -819,6 +829,7 @@ namespace Alex_dammyDiscrimination
                 // 位置を指定してしまう
                 dammyForm2.Location = point;
                 dammyForm2.pictureBox1.Visible = true;
+                dammyForm2.pictureBox5.Visible = true;
                 dammyForm2.Show();
 
                 textBox_未来観測位置確認.Text = "確認終了";
@@ -828,6 +839,7 @@ namespace Alex_dammyDiscrimination
             {
                 dammyForm2.Hide();
                 dammyForm2.pictureBox1.Visible = false;
+                dammyForm2.pictureBox5.Visible = false;
                 textBox_未来観測位置確認.Text = "位置確認";
                 button1_未来観測表示位置確認.Text = "位置確認";
             }
