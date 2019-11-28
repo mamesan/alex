@@ -374,7 +374,7 @@ namespace Alex_dammyDiscrimination
                     // 定数が取れた場合のみ、処理に入れる
                     if (string.IsNullOrEmpty(LogMyJobName))
                     {
-                        Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: " + MyJobName + " Level: 80 .*");
+                        Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: Whm Level: 80 .*");
                         if (regex.IsMatch(logInfo.logLine))
                         {
                             LogMyJobName = regex.Replace(logInfo.logLine, "$1");
@@ -662,7 +662,7 @@ namespace Alex_dammyDiscrimination
                     // 定数が取れた場合のみ、処理に入れる
                     if (string.IsNullOrEmpty(LogMyJobName))
                     {
-                        Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: " + MyJobName + " Level: 80 .*");
+                        Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: Whm Level: 80 .*");
                         if (regex.IsMatch(logInfo.logLine))
                         {
                             LogMyJobName = regex.Replace(logInfo.logLine, "$1");
@@ -715,7 +715,7 @@ namespace Alex_dammyDiscrimination
                                 {
                                     // 接触保護命令
                                     TTSStr = "せっしょくほご、えーまーかー";
-                                    dammyForm3.pictureBox1.Visible = false;
+                                    dammyForm3.pictureBox1.Visible = true;
                                     dammyForm3.pictureBox2.Visible = false;
                                     dammyForm3.pictureBox3.Visible = false;
                                     dammyForm3.pictureBox4.Visible = false;
@@ -734,7 +734,7 @@ namespace Alex_dammyDiscrimination
                                     TTSStr = "せっしょくきんし、びーまーかーのちょいうえ";
                                     dammyForm3.pictureBox1.Visible = false;
                                     dammyForm3.pictureBox2.Visible = false;
-                                    dammyForm3.pictureBox3.Visible = false;
+                                    dammyForm3.pictureBox3.Visible = true;
                                     dammyForm3.pictureBox4.Visible = false;
                                     dammyForm3.pictureBox5.Visible = false;
                                     dammyForm3.pictureBox6.Visible = false;
@@ -755,7 +755,7 @@ namespace Alex_dammyDiscrimination
                                     // 逃亡監察命令
                                     TTSStr = "とうぼうかんし、びーまーかーじょう";
                                     dammyForm3.pictureBox1.Visible = false;
-                                    dammyForm3.pictureBox2.Visible = false;
+                                    dammyForm3.pictureBox2.Visible = true;
                                     dammyForm3.pictureBox3.Visible = false;
                                     dammyForm3.pictureBox4.Visible = false;
                                     dammyForm3.pictureBox5.Visible = false;
@@ -776,7 +776,7 @@ namespace Alex_dammyDiscrimination
                                         TTSStr = "とうぼうきんし、みどりせんついてる、びーまーかーのちょいうえ";
                                         dammyForm3.pictureBox1.Visible = false;
                                         dammyForm3.pictureBox2.Visible = false;
-                                        dammyForm3.pictureBox3.Visible = false;
+                                        dammyForm3.pictureBox3.Visible = true;
                                         dammyForm3.pictureBox4.Visible = false;
                                         dammyForm3.pictureBox5.Visible = false;
                                         dammyForm3.pictureBox6.Visible = false;
@@ -786,7 +786,7 @@ namespace Alex_dammyDiscrimination
                                         dammyForm3.pictureBox10.Visible = false;
                                         dammyForm3.pictureBox11.Visible = false;
                                         dammyForm3.pictureBox12.Visible = false;
-                                    } 
+                                    }
                                     else if (青List.Contains(LogMyJobName))
                                     {
                                         // 青線
@@ -795,7 +795,7 @@ namespace Alex_dammyDiscrimination
                                         dammyForm3.pictureBox2.Visible = false;
                                         dammyForm3.pictureBox3.Visible = false;
                                         dammyForm3.pictureBox4.Visible = false;
-                                        dammyForm3.pictureBox5.Visible = false;
+                                        dammyForm3.pictureBox5.Visible = true;
                                         dammyForm3.pictureBox6.Visible = false;
                                         dammyForm3.pictureBox7.Visible = false;
                                         dammyForm3.pictureBox8.Visible = false;
@@ -811,7 +811,7 @@ namespace Alex_dammyDiscrimination
                                         dammyForm3.pictureBox1.Visible = false;
                                         dammyForm3.pictureBox2.Visible = false;
                                         dammyForm3.pictureBox3.Visible = false;
-                                        dammyForm3.pictureBox4.Visible = false;
+                                        dammyForm3.pictureBox4.Visible = true;
                                         dammyForm3.pictureBox5.Visible = false;
                                         dammyForm3.pictureBox6.Visible = false;
                                         dammyForm3.pictureBox7.Visible = false;

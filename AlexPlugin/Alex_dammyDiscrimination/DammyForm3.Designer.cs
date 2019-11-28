@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DammyForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DammyForm3));
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
@@ -58,7 +58,6 @@
             // pictureBox6
             // 
             this.pictureBox6.ErrorImage = null;
-            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
             this.pictureBox6.InitialImage = null;
             this.pictureBox6.Location = new System.Drawing.Point(3, 1);
             this.pictureBox6.Name = "pictureBox6";
@@ -82,7 +81,6 @@
             // pictureBox7
             // 
             this.pictureBox7.ErrorImage = null;
-            this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
             this.pictureBox7.InitialImage = null;
             this.pictureBox7.Location = new System.Drawing.Point(1, 1);
             this.pictureBox7.Name = "pictureBox7";
@@ -118,7 +116,6 @@
             // pictureBox8
             // 
             this.pictureBox8.ErrorImage = null;
-            this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
             this.pictureBox8.InitialImage = null;
             this.pictureBox8.Location = new System.Drawing.Point(3, 1);
             this.pictureBox8.Name = "pictureBox8";
@@ -195,7 +192,7 @@
             this.pictureBox12.TabIndex = 5;
             this.pictureBox12.TabStop = false;
             // 
-            // DammyForm
+            // DammyForm3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -212,7 +209,7 @@
             this.Controls.Add(this.pictureBox7);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "DammyForm";
+            this.Name = "DammyForm3";
             this.Text = "Terops1234";
             this.Load += new System.EventHandler(this.TeropsABCD_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();

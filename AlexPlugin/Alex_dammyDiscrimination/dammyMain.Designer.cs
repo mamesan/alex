@@ -44,6 +44,7 @@
             this.checkBox1_miraikansokugazou_init = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_未来観測位置確認 = new System.Windows.Forms.TextBox();
@@ -55,6 +56,8 @@
             this.textBox_miraikansokuzahyoX_init = new System.Windows.Forms.TextBox();
             this.checkBox1_miraikansokucheck_init = new System.Windows.Forms.CheckBox();
             this.未来観測β = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBox_未来観測位置確認ベタ = new System.Windows.Forms.TextBox();
@@ -65,9 +68,8 @@
             this.textBox_miraikansokuzahyobetaX_init = new System.Windows.Forms.TextBox();
             this.checkBox1_miraikansokubetagazou_init = new System.Windows.Forms.CheckBox();
             this.checkBox2_miraikansokubetariyou_init = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tab.SuspendLayout();
             this.アレキビーム判定.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -232,6 +234,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.comboBox1);
             this.tabPage2.Controls.Add(this.checkBox1_miraikansokugazou_init);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label1);
@@ -287,6 +290,16 @@
             this.label1.Size = new System.Drawing.Size(27, 15);
             this.label1.TabIndex = 78;
             this.label1.Text = "Y：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(76, 302);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(486, 61);
+            this.label7.TabIndex = 77;
+            this.label7.Text = "死人が出るとくるいます。";
             // 
             // label4
             // 
@@ -369,7 +382,7 @@
             // textBox1_job_init
             // 
             this.textBox1_job_init.Font = new System.Drawing.Font("Meiryo UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox1_job_init.Location = new System.Drawing.Point(77, 158);
+            this.textBox1_job_init.Location = new System.Drawing.Point(179, 162);
             this.textBox1_job_init.Name = "textBox1_job_init";
             this.textBox1_job_init.Size = new System.Drawing.Size(66, 27);
             this.textBox1_job_init.TabIndex = 72;
@@ -412,6 +425,7 @@
             // 
             // 未来観測β
             // 
+            this.未来観測β.Controls.Add(this.label10);
             this.未来観測β.Controls.Add(this.label8);
             this.未来観測β.Controls.Add(this.label9);
             this.未来観測β.Controls.Add(this.label5);
@@ -431,6 +445,26 @@
             this.未来観測β.TabIndex = 2;
             this.未来観測β.Text = "未来観測β";
             this.未来観測β.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label8.Location = new System.Drawing.Point(94, 288);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(486, 61);
+            this.label8.TabIndex = 83;
+            this.label8.Text = "死人が出るとくるいます。";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label9.Location = new System.Drawing.Point(94, 216);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(654, 61);
+            this.label9.TabIndex = 84;
+            this.label9.Text = "青線緑線の判別だけできません。";
             // 
             // label5
             // 
@@ -503,7 +537,7 @@
             "3.0倍",
             "4.0倍",
             "5.0倍"});
-            this.listBox_miraikansokubairitubeta_init.Location = new System.Drawing.Point(131, 103);
+            this.listBox_miraikansokubairitubeta_init.Location = new System.Drawing.Point(68, 188);
             this.listBox_miraikansokubairitubeta_init.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBox_miraikansokubairitubeta_init.Name = "listBox_miraikansokubairitubeta_init";
             this.listBox_miraikansokubairitubeta_init.Size = new System.Drawing.Size(90, 23);
@@ -556,35 +590,42 @@
             this.checkBox2_miraikansokubetariyou_init.Text = "ご利用";
             this.checkBox2_miraikansokubetariyou_init.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // label10
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(76, 302);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(486, 61);
-            this.label7.TabIndex = 77;
-            this.label7.Text = "死人が出るとくるいます。";
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label10.Location = new System.Drawing.Point(30, 193);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(38, 15);
+            this.label10.TabIndex = 86;
+            this.label10.Text = "Job：";
+            this.label10.Visible = false;
             // 
-            // label8
+            // comboBox1
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(94, 288);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(486, 61);
-            this.label8.TabIndex = 83;
-            this.label8.Text = "死人が出るとくるいます。";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(94, 216);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(654, 61);
-            this.label9.TabIndex = 84;
-            this.label9.Text = "青線緑線の判別だけできません。";
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "1倍",
+            "1.1倍",
+            "1.2倍",
+            "1.3倍",
+            "1.4倍",
+            "1.5倍",
+            "1.6倍",
+            "1.7倍",
+            "1.8倍",
+            "1.9倍",
+            "2.0倍",
+            "3.0倍",
+            "4.0倍",
+            "5.0倍"});
+            this.comboBox1.Location = new System.Drawing.Point(78, 162);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(90, 23);
+            this.comboBox1.TabIndex = 80;
             // 
             // dammyMain
             // 
@@ -646,5 +687,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        public System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label10;
     }
 }

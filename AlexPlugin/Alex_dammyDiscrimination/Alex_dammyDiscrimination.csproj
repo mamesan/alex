@@ -95,6 +95,9 @@
     <EmbeddedResource Include="DammyForm2.resx">
       <DependentUpon>DammyForm2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DammyForm3.resx">
+      <DependentUpon>DammyForm3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dammyMain.resx">
       <DependentUpon>dammyMain.cs</DependentUpon>
     </EmbeddedResource>
