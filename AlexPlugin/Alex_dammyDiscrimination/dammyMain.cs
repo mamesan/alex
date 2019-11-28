@@ -43,13 +43,26 @@ namespace Alex_dammyDiscrimination
         private bool αStopFlg = false;
         private bool 名誉罰用flg = false;
 
+        // β用フラグ
+        private bool 黄色flg = false;
+        private bool 紫flg = false;
+        private List<string> ぼっちList = new List<string>();
+        private List<string> 青緑List = new List<string>();
+
+        private bool βStopFlg = false;
+
+
+
         private DammyForm dammyForm = new DammyForm();
         private DammyForm2 dammyForm2 = new DammyForm2();
+        private DammyForm3 dammyForm3 = new DammyForm3();
 
         private Size dammyFormSize = new Size();
         private Size dammyFormpictureBoxSize = new Size();
         private Size dammyForm2Size = new Size();
         private Size dammyForm2pictureBoxSize = new Size();
+        private Size dammyForm3Size = new Size();
+        private Size dammyForm3pictureBoxSize = new Size();
 
         public dammyMain()
         {
@@ -131,13 +144,19 @@ namespace Alex_dammyDiscrimination
             dammyForm2Size = new Size(390, 220);
             dammyForm2pictureBoxSize = new Size(185, 185);
 
+            dammyForm3Size = new Size(364, 376);
+            dammyForm3pictureBoxSize = new Size(350, 350);
 
+            dammyForm.Show();
+            dammyForm2.Show();
+            dammyForm3.Show();
 
             // フォームの初期化
             formInit();
             try
             {
                 Bairitu未来観測Setting();
+                Bairitu未来観測betaSetting();
                 BairituアレキビームSetting();
                 dammyForm2.Location = SettingPoint(textBox_miraikansokuzahyoX_init, textBox_miraikansokuzahyoY_init);
                 dammyForm.Location = SettingPoint(textBox_arekibimuzahyoX_init, textBox_arekibimuzahyoY_init);
@@ -173,7 +192,7 @@ namespace Alex_dammyDiscrimination
         /// </summary>
         private void formInit()
         {
-            dammyForm.Show();
+
             dammyForm.pictureBox1.Visible = true;
             dammyForm.pictureBox2.Visible = true;
             dammyForm.pictureBox3.Visible = true;
@@ -200,7 +219,7 @@ namespace Alex_dammyDiscrimination
             dammyForm.pictureBox12.Visible = false;
             dammyForm.Hide();
 
-            dammyForm2.Show();
+
             dammyForm2.pictureBox1.Visible = true;
             dammyForm2.pictureBox2.Visible = true;
             dammyForm2.pictureBox3.Visible = true;
@@ -227,6 +246,32 @@ namespace Alex_dammyDiscrimination
             dammyForm2.pictureBox12.Visible = false;
             dammyForm2.Hide();
 
+
+            dammyForm3.pictureBox1.Visible = true;
+            dammyForm3.pictureBox2.Visible = true;
+            dammyForm3.pictureBox3.Visible = true;
+            dammyForm3.pictureBox4.Visible = true;
+            dammyForm3.pictureBox5.Visible = true;
+            dammyForm3.pictureBox6.Visible = true;
+            dammyForm3.pictureBox7.Visible = true;
+            dammyForm3.pictureBox8.Visible = true;
+            dammyForm3.pictureBox9.Visible = true;
+            dammyForm3.pictureBox10.Visible = true;
+            dammyForm3.pictureBox11.Visible = true;
+            dammyForm3.pictureBox12.Visible = true;
+            dammyForm3.pictureBox1.Visible = false;
+            dammyForm3.pictureBox2.Visible = false;
+            dammyForm3.pictureBox3.Visible = false;
+            dammyForm3.pictureBox4.Visible = false;
+            dammyForm3.pictureBox5.Visible = false;
+            dammyForm3.pictureBox6.Visible = false;
+            dammyForm3.pictureBox7.Visible = false;
+            dammyForm3.pictureBox8.Visible = false;
+            dammyForm3.pictureBox9.Visible = false;
+            dammyForm3.pictureBox10.Visible = false;
+            dammyForm3.pictureBox11.Visible = false;
+            dammyForm3.pictureBox12.Visible = false;
+            dammyForm3.Hide();
         }
 
         /// <summary>
@@ -268,6 +313,13 @@ namespace Alex_dammyDiscrimination
                     行動命令flg = false;
                     名誉罰用flg = false;
                     αStopFlg = false;
+
+                    // 未来観測β用
+                    黄色flg = false;
+                    紫flg = false;
+                    ぼっちList = new List<string>();
+                    青緑List = new List<string>();
+
                     formInit();
 
                 }
@@ -292,6 +344,13 @@ namespace Alex_dammyDiscrimination
                     名誉罰用flg = false;
                     αStopFlg = false;
                     initButtoleFlg = false;
+
+                    // 未来観測β用
+                    黄色flg = false;
+                    紫flg = false;
+                    ぼっちList = new List<string>();
+                    青緑List = new List<string>();
+                    βStopFlg = false;
 
                     formInit();
 
@@ -324,7 +383,7 @@ namespace Alex_dammyDiscrimination
                             停止命令flg = true;
                         }
                         // 行動命令
-                        else if (logInfo.logLine.Contains("4B0E:Unknown_4B0e"))
+                        else if (logInfo.logLine.Contains("4B0D:Unknown_4B0d"))
                         {
                             行動命令flg = true;
                         }
@@ -579,6 +638,7 @@ namespace Alex_dammyDiscrimination
                         未来確定αflg = false;
                         停止命令flg = false;
                         行動命令flg = false;
+                        LogMyJobName = "";
                     }
                 }
 
@@ -589,10 +649,187 @@ namespace Alex_dammyDiscrimination
                 if (logInfo.logLine.Contains("は「未来観測β」の構え。") && false)
                 {
                     未来確定βflg = true;
+                    LogMyJobName = "";
                 }
                 if (未来確定βflg)
                 {
 
+
+                    // 定数が取れた場合のみ、処理に入れる
+                    if (string.IsNullOrEmpty(LogMyJobName))
+                    {
+                        Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: " + MyJobName + " Level: 80 .*");
+                        if (regex.IsMatch(logInfo.logLine))
+                        {
+                            LogMyJobName = regex.Replace(logInfo.logLine, "$1");
+                        }
+                    }
+
+                    // 定数が取れた場合のみ、処理に入れる
+                    if (!string.IsNullOrEmpty(LogMyJobName) && !βStopFlg)
+                    {
+
+                        // 紫
+                        if (logInfo.logLine.Contains(":850893:40800000:E0000000:") &&
+                            logInfo.logLine.Contains(LogMyJobName))
+                        {
+                            紫flg = true;
+                        }
+                        // 黄色
+                        else if (logInfo.logLine.Contains(":840893:40800000:E0000000:") &&
+                            logInfo.logLine.Contains(LogMyJobName))
+                        {
+                            黄色flg = true;
+                        }
+                         
+
+
+                        // 磁石か臭い物の判定を実施
+                        if (logInfo.logLine.Contains("48A3:Unknown_48A3") || logInfo.logLine.Contains("48A2: Unknown_48A2"))
+                        {
+                            ぼっちList.Add(logInfo.logLine);
+                        }
+                        // とりあえず線ついた人を格納していく
+                        // 線はいったんよくわからなかったので保留
+                        if (logInfo.logLine.Contains("489C:Unknown_489C") || logInfo.logLine.Contains("489B:Unknown_489B"))
+                        {
+                            青緑List.Add(logInfo.logLine);
+                        }
+                        
+
+
+
+
+                        // ぼっちのカウントが2かつ、線が4人くっついたになった時点で、判定を行う
+                        if (ぼっちList.Count == 2 && 青緑List.Count == 4)
+                        {
+                            dammyForm3.Show();
+                            string TTSStr = "";
+
+                            // 黄色の処理
+                            if (黄色flg)
+                            {
+                                if (ぼっちList.Contains(LogMyJobName))
+                                {
+                                    // 接触保護命令
+                                    TTSStr = "せっしょくほご、えーまーかー";
+                                    dammyForm3.pictureBox1.Visible = false;
+                                    dammyForm3.pictureBox2.Visible = false;
+                                    dammyForm3.pictureBox3.Visible = false;
+                                    dammyForm3.pictureBox4.Visible = false;
+                                    dammyForm3.pictureBox5.Visible = false;
+                                    dammyForm3.pictureBox6.Visible = false;
+                                    dammyForm3.pictureBox7.Visible = false;
+                                    dammyForm3.pictureBox8.Visible = false;
+                                    dammyForm3.pictureBox9.Visible = false;
+                                    dammyForm3.pictureBox10.Visible = false;
+                                    dammyForm3.pictureBox11.Visible = false;
+                                    dammyForm3.pictureBox12.Visible = false;
+                                }
+                                else
+                                {
+                                    // その他
+                                    TTSStr = "せっしょくきんし、びーまーかーちょいうえ";
+                                    dammyForm3.pictureBox1.Visible = false;
+                                    dammyForm3.pictureBox2.Visible = false;
+                                    dammyForm3.pictureBox3.Visible = false;
+                                    dammyForm3.pictureBox4.Visible = false;
+                                    dammyForm3.pictureBox5.Visible = false;
+                                    dammyForm3.pictureBox6.Visible = false;
+                                    dammyForm3.pictureBox7.Visible = false;
+                                    dammyForm3.pictureBox8.Visible = false;
+                                    dammyForm3.pictureBox9.Visible = false;
+                                    dammyForm3.pictureBox10.Visible = false;
+                                    dammyForm3.pictureBox11.Visible = false;
+                                    dammyForm3.pictureBox12.Visible = false;
+
+                                }
+                            }
+                            // 紫の処理
+                            else if (紫flg)
+                            {
+                                if (ぼっちList.Contains(LogMyJobName))
+                                {
+                                    // 逃亡監察命令
+                                    TTSStr = "とうぼうかんし、びーまーかーじょう";
+                                    dammyForm3.pictureBox1.Visible = false;
+                                    dammyForm3.pictureBox2.Visible = false;
+                                    dammyForm3.pictureBox3.Visible = false;
+                                    dammyForm3.pictureBox4.Visible = false;
+                                    dammyForm3.pictureBox5.Visible = false;
+                                    dammyForm3.pictureBox6.Visible = false;
+                                    dammyForm3.pictureBox7.Visible = false;
+                                    dammyForm3.pictureBox8.Visible = false;
+                                    dammyForm3.pictureBox9.Visible = false;
+                                    dammyForm3.pictureBox10.Visible = false;
+                                    dammyForm3.pictureBox11.Visible = false;
+                                    dammyForm3.pictureBox12.Visible = false;
+                                }
+                                else
+                                {
+                                    // 逃亡禁止命令
+                                    if (青緑List.Contains(LogMyJobName))
+                                    {
+                                        // 何かしらの線がついた人
+                                        // その他
+                                        TTSStr = "とうぼうきんし、どっちかの色、びーまーかー上下どちらか";
+                                        dammyForm3.pictureBox1.Visible = false;
+                                        dammyForm3.pictureBox2.Visible = false;
+                                        dammyForm3.pictureBox3.Visible = false;
+                                        dammyForm3.pictureBox4.Visible = false;
+                                        dammyForm3.pictureBox5.Visible = false;
+                                        dammyForm3.pictureBox6.Visible = false;
+                                        dammyForm3.pictureBox7.Visible = false;
+                                        dammyForm3.pictureBox8.Visible = false;
+                                        dammyForm3.pictureBox9.Visible = false;
+                                        dammyForm3.pictureBox10.Visible = false;
+                                        dammyForm3.pictureBox11.Visible = false;
+                                        dammyForm3.pictureBox12.Visible = false;
+                                    } 
+                                    else
+                                    {
+                                        // 無職
+                                        TTSStr = "とうぼうきんし、むしょく、びーまーかーまよこ";
+                                        dammyForm3.pictureBox1.Visible = false;
+                                        dammyForm3.pictureBox2.Visible = false;
+                                        dammyForm3.pictureBox3.Visible = false;
+                                        dammyForm3.pictureBox4.Visible = false;
+                                        dammyForm3.pictureBox5.Visible = false;
+                                        dammyForm3.pictureBox6.Visible = false;
+                                        dammyForm3.pictureBox7.Visible = false;
+                                        dammyForm3.pictureBox8.Visible = false;
+                                        dammyForm3.pictureBox9.Visible = false;
+                                        dammyForm3.pictureBox10.Visible = false;
+                                        dammyForm3.pictureBox11.Visible = false;
+                                        dammyForm3.pictureBox12.Visible = false;
+                                    }
+                                }
+                            }
+                            // TTSを発言させる
+                            if (!checkBox1_miraikansokubetagazou_init.Checked)
+                            {
+                                ActGlobals.oFormActMain.TTS(TTSStr);
+                            }
+                        }
+
+
+
+
+                        // 加重罰
+                        /*
+                        else if (logInfo.logLine.Contains("48A5:Unknown_48A5"))
+                        {
+                            Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::48A5:Unknown_48A5.*");
+                            加重罰List.Add(regex.Replace(logInfo.logLine, "$1"));
+                        }
+                        */
+
+
+
+
+
+
+                    }
                     // ダミーアレキ判定用
                     if (logInfo.logLine.Contains("489E:Unknown_489E"))
                     {
@@ -706,8 +943,10 @@ namespace Alex_dammyDiscrimination
 
                     if (logInfo.logLine.Contains("拝火の秘蹟"))
                     {
+                        βStopFlg = false;
                         未来確定βflg = false;
                         dammyForm.Hide();
+                        dammyForm3.Hide();
                     }
                 }
 
@@ -716,7 +955,7 @@ namespace Alex_dammyDiscrimination
             }
             catch (Exception)
             {
-
+                // 例外は全て握りつぶす
             }
         }
 
@@ -869,6 +1108,81 @@ namespace Alex_dammyDiscrimination
             dammyForm2.pictureBox11.Size = new Size((int)(dammyForm2pictureBoxSize.Width * bairitsu), (int)(dammyForm2pictureBoxSize.Height * bairitsu));
             dammyForm2.pictureBox12.Size = new Size((int)(dammyForm2pictureBoxSize.Width * bairitsu), (int)(dammyForm2pictureBoxSize.Height * bairitsu));
         }
+        private void textBox_miraikansokuzahyobetaY_init_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dammyForm3.Location = SettingPoint(textBox_miraikansokuzahyobetaX_init, textBox_miraikansokuzahyobetaY_init);
+            }
+            catch
+            { }
+        }
+
+        private void textBox_miraikansokuzahyobetaX_init_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dammyForm3.Location = SettingPoint(textBox_miraikansokuzahyobetaX_init, textBox_miraikansokuzahyobetaY_init);
+            }
+            catch
+            { }
+        }
+
+        private void button1_未来観測表示位置確認ベタ_Click(object sender, EventArgs e)
+        {
+            if (textBox_未来観測位置確認ベタ.Text == "位置確認")
+            {
+                int X = textBox_miraikansokuzahyobetaX_init.Text == "" ? 100 : int.Parse(textBox_miraikansokuzahyobetaX_init.Text);
+                int Y = textBox_miraikansokuzahyobetaY_init.Text == "" ? 100 : int.Parse(textBox_miraikansokuzahyobetaY_init.Text);
+                Point point = new Point(X, Y);
+                // 位置を指定してしまう
+                dammyForm3.Location = point;
+                dammyForm3.pictureBox1.Visible = true;
+                dammyForm3.Show();
+
+                textBox_未来観測位置確認ベタ.Text = "確認終了";
+                button1_未来観測表示位置確認ベタ.Text = "確認終了";
+            }
+            else
+            {
+                dammyForm3.Hide();
+                dammyForm3.pictureBox1.Visible = false;
+                textBox_未来観測位置確認ベタ.Text = "位置確認";
+                button1_未来観測表示位置確認ベタ.Text = "位置確認";
+            }
+        }
+
+
+
+        private void listBox_miraikansokubairitubeta_init_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Bairitu未来観測betaSetting();
+        }
+
+        private void Bairitu未来観測betaSetting()
+        {
+            listBox_miraikansokubairitubeta_text_init.Text = listBox_miraikansokubairitubeta_init.Text;
+            if (listBox_miraikansokubairitubeta_text_init.Text == null)
+            {
+                listBox_miraikansokubairitubeta_text_init.Text = "1倍";
+            }
+            double bairitsu = double.Parse(listBox_miraikansokubairitubeta_text_init.Text.ToString().Replace("倍", ""));
+
+            dammyForm3.Size = new Size((int)(dammyForm3Size.Width * bairitsu), (int)(dammyForm3Size.Height * bairitsu));
+            dammyForm3.pictureBox1.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox2.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox3.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox4.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox5.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox6.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox7.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox8.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox9.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox10.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox11.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+            dammyForm3.pictureBox12.Size = new Size((int)(dammyForm3pictureBoxSize.Width * bairitsu), (int)(dammyForm3pictureBoxSize.Height * bairitsu));
+        }
+
 
         private Point SettingPoint(TextBox textBoxX, TextBox textBoxY)
         {

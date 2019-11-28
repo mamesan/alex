@@ -44,6 +44,7 @@
             this.checkBox1_miraikansokugazou_init = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_未来観測位置確認 = new System.Windows.Forms.TextBox();
             this.listBox_miraikansokubairitu_text_init = new System.Windows.Forms.TextBox();
@@ -53,16 +54,31 @@
             this.textBox_miraikansokuzahyoY_init = new System.Windows.Forms.TextBox();
             this.textBox_miraikansokuzahyoX_init = new System.Windows.Forms.TextBox();
             this.checkBox1_miraikansokucheck_init = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.未来観測β = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox_未来観測位置確認ベタ = new System.Windows.Forms.TextBox();
+            this.listBox_miraikansokubairitubeta_text_init = new System.Windows.Forms.TextBox();
+            this.button1_未来観測表示位置確認ベタ = new System.Windows.Forms.Button();
+            this.listBox_miraikansokubairitubeta_init = new System.Windows.Forms.ComboBox();
+            this.textBox_miraikansokuzahyobetaY_init = new System.Windows.Forms.TextBox();
+            this.textBox_miraikansokuzahyobetaX_init = new System.Windows.Forms.TextBox();
+            this.checkBox1_miraikansokubetagazou_init = new System.Windows.Forms.CheckBox();
+            this.checkBox2_miraikansokubetariyou_init = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.tab.SuspendLayout();
             this.アレキビーム判定.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.未来観測β.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab
             // 
             this.tab.Controls.Add(this.アレキビーム判定);
             this.tab.Controls.Add(this.tabPage2);
+            this.tab.Controls.Add(this.未来観測β);
             this.tab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tab.Location = new System.Drawing.Point(0, 0);
             this.tab.Name = "tab";
@@ -219,6 +235,7 @@
             this.tabPage2.Controls.Add(this.checkBox1_miraikansokugazou_init);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.textBox_未来観測位置確認);
@@ -259,6 +276,7 @@
             this.label3.Size = new System.Drawing.Size(38, 15);
             this.label3.TabIndex = 78;
             this.label3.Text = "Job：";
+            this.label3.Visible = false;
             // 
             // label1
             // 
@@ -269,6 +287,16 @@
             this.label1.Size = new System.Drawing.Size(27, 15);
             this.label1.TabIndex = 78;
             this.label1.Text = "Y：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label4.Location = new System.Drawing.Point(76, 230);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(684, 61);
+            this.label4.TabIndex = 77;
+            this.label4.Text = "名誉と無職の判別だけできません。";
             // 
             // label2
             // 
@@ -345,6 +373,7 @@
             this.textBox1_job_init.Name = "textBox1_job_init";
             this.textBox1_job_init.Size = new System.Drawing.Size(66, 27);
             this.textBox1_job_init.TabIndex = 72;
+            this.textBox1_job_init.Visible = false;
             this.textBox1_job_init.TextChanged += new System.EventHandler(this.textBox_未来観測zahyoY_init_TextChanged);
             // 
             // textBox_miraikansokuzahyoY_init
@@ -370,6 +399,8 @@
             // checkBox1_miraikansokucheck_init
             // 
             this.checkBox1_miraikansokucheck_init.AutoSize = true;
+            this.checkBox1_miraikansokucheck_init.Checked = true;
+            this.checkBox1_miraikansokucheck_init.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1_miraikansokucheck_init.Enabled = false;
             this.checkBox1_miraikansokucheck_init.Font = new System.Drawing.Font("Meiryo UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.checkBox1_miraikansokucheck_init.Location = new System.Drawing.Point(19, 19);
@@ -378,17 +409,182 @@
             this.checkBox1_miraikansokucheck_init.TabIndex = 1;
             this.checkBox1_miraikansokucheck_init.Text = "ご利用";
             this.checkBox1_miraikansokucheck_init.UseVisualStyleBackColor = true;
-            this.checkBox1_miraikansokucheck_init.Visible = false;
             // 
-            // label4
+            // 未来観測β
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(76, 230);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(171, 61);
-            this.label4.TabIndex = 77;
-            this.label4.Text = "調整中";
+            this.未来観測β.Controls.Add(this.label8);
+            this.未来観測β.Controls.Add(this.label9);
+            this.未来観測β.Controls.Add(this.label5);
+            this.未来観測β.Controls.Add(this.label6);
+            this.未来観測β.Controls.Add(this.textBox_未来観測位置確認ベタ);
+            this.未来観測β.Controls.Add(this.listBox_miraikansokubairitubeta_text_init);
+            this.未来観測β.Controls.Add(this.button1_未来観測表示位置確認ベタ);
+            this.未来観測β.Controls.Add(this.listBox_miraikansokubairitubeta_init);
+            this.未来観測β.Controls.Add(this.textBox_miraikansokuzahyobetaY_init);
+            this.未来観測β.Controls.Add(this.textBox_miraikansokuzahyobetaX_init);
+            this.未来観測β.Controls.Add(this.checkBox1_miraikansokubetagazou_init);
+            this.未来観測β.Controls.Add(this.checkBox2_miraikansokubetariyou_init);
+            this.未来観測β.Location = new System.Drawing.Point(4, 22);
+            this.未来観測β.Name = "未来観測β";
+            this.未来観測β.Padding = new System.Windows.Forms.Padding(3);
+            this.未来観測β.Size = new System.Drawing.Size(924, 831);
+            this.未来観測β.TabIndex = 2;
+            this.未来観測β.Text = "未来観測β";
+            this.未来観測β.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label5.Location = new System.Drawing.Point(28, 144);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(27, 15);
+            this.label5.TabIndex = 82;
+            this.label5.Text = "Y：";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label6.Location = new System.Drawing.Point(28, 111);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(27, 15);
+            this.label6.TabIndex = 81;
+            this.label6.Text = "X：";
+            // 
+            // textBox_未来観測位置確認ベタ
+            // 
+            this.textBox_未来観測位置確認ベタ.Font = new System.Drawing.Font("Meiryo UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.textBox_未来観測位置確認ベタ.Location = new System.Drawing.Point(146, 71);
+            this.textBox_未来観測位置確認ベタ.Name = "textBox_未来観測位置確認ベタ";
+            this.textBox_未来観測位置確認ベタ.Size = new System.Drawing.Size(12, 27);
+            this.textBox_未来観測位置確認ベタ.TabIndex = 80;
+            this.textBox_未来観測位置確認ベタ.Text = "位置確認";
+            this.textBox_未来観測位置確認ベタ.Visible = false;
+            // 
+            // listBox_miraikansokubairitubeta_text_init
+            // 
+            this.listBox_miraikansokubairitubeta_text_init.Font = new System.Drawing.Font("Meiryo UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.listBox_miraikansokubairitubeta_text_init.Location = new System.Drawing.Point(130, 71);
+            this.listBox_miraikansokubairitubeta_text_init.Name = "listBox_miraikansokubairitubeta_text_init";
+            this.listBox_miraikansokubairitubeta_text_init.Size = new System.Drawing.Size(10, 27);
+            this.listBox_miraikansokubairitubeta_text_init.TabIndex = 79;
+            this.listBox_miraikansokubairitubeta_text_init.Text = "1倍";
+            this.listBox_miraikansokubairitubeta_text_init.Visible = false;
+            // 
+            // button1_未来観測表示位置確認ベタ
+            // 
+            this.button1_未来観測表示位置確認ベタ.Font = new System.Drawing.Font("Meiryo UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.button1_未来観測表示位置確認ベタ.Location = new System.Drawing.Point(130, 132);
+            this.button1_未来観測表示位置確認ベタ.Name = "button1_未来観測表示位置確認ベタ";
+            this.button1_未来観測表示位置確認ベタ.Size = new System.Drawing.Size(107, 32);
+            this.button1_未来観測表示位置確認ベタ.TabIndex = 78;
+            this.button1_未来観測表示位置確認ベタ.Text = "位置確認";
+            this.button1_未来観測表示位置確認ベタ.UseVisualStyleBackColor = true;
+            this.button1_未来観測表示位置確認ベタ.Click += new System.EventHandler(this.button1_未来観測表示位置確認ベタ_Click);
+            // 
+            // listBox_miraikansokubairitubeta_init
+            // 
+            this.listBox_miraikansokubairitubeta_init.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.listBox_miraikansokubairitubeta_init.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.listBox_miraikansokubairitubeta_init.FormattingEnabled = true;
+            this.listBox_miraikansokubairitubeta_init.Items.AddRange(new object[] {
+            "1倍",
+            "1.1倍",
+            "1.2倍",
+            "1.3倍",
+            "1.4倍",
+            "1.5倍",
+            "1.6倍",
+            "1.7倍",
+            "1.8倍",
+            "1.9倍",
+            "2.0倍",
+            "3.0倍",
+            "4.0倍",
+            "5.0倍"});
+            this.listBox_miraikansokubairitubeta_init.Location = new System.Drawing.Point(131, 103);
+            this.listBox_miraikansokubairitubeta_init.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listBox_miraikansokubairitubeta_init.Name = "listBox_miraikansokubairitubeta_init";
+            this.listBox_miraikansokubairitubeta_init.Size = new System.Drawing.Size(90, 23);
+            this.listBox_miraikansokubairitubeta_init.TabIndex = 77;
+            this.listBox_miraikansokubairitubeta_init.SelectedIndexChanged += new System.EventHandler(this.listBox_miraikansokubairitubeta_init_SelectedIndexChanged);
+            // 
+            // textBox_miraikansokuzahyobetaY_init
+            // 
+            this.textBox_miraikansokuzahyobetaY_init.Font = new System.Drawing.Font("Meiryo UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox_miraikansokuzahyobetaY_init.Location = new System.Drawing.Point(58, 136);
+            this.textBox_miraikansokuzahyobetaY_init.Name = "textBox_miraikansokuzahyobetaY_init";
+            this.textBox_miraikansokuzahyobetaY_init.Size = new System.Drawing.Size(66, 27);
+            this.textBox_miraikansokuzahyobetaY_init.TabIndex = 76;
+            this.textBox_miraikansokuzahyobetaY_init.Text = "100";
+            this.textBox_miraikansokuzahyobetaY_init.TextChanged += new System.EventHandler(this.textBox_miraikansokuzahyobetaY_init_TextChanged);
+            // 
+            // textBox_miraikansokuzahyobetaX_init
+            // 
+            this.textBox_miraikansokuzahyobetaX_init.Font = new System.Drawing.Font("Meiryo UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox_miraikansokuzahyobetaX_init.Location = new System.Drawing.Point(58, 103);
+            this.textBox_miraikansokuzahyobetaX_init.Name = "textBox_miraikansokuzahyobetaX_init";
+            this.textBox_miraikansokuzahyobetaX_init.Size = new System.Drawing.Size(66, 27);
+            this.textBox_miraikansokuzahyobetaX_init.TabIndex = 75;
+            this.textBox_miraikansokuzahyobetaX_init.Text = "100";
+            this.textBox_miraikansokuzahyobetaX_init.TextChanged += new System.EventHandler(this.textBox_miraikansokuzahyobetaX_init_TextChanged);
+            // 
+            // checkBox1_miraikansokubetagazou_init
+            // 
+            this.checkBox1_miraikansokubetagazou_init.AutoSize = true;
+            this.checkBox1_miraikansokubetagazou_init.Checked = true;
+            this.checkBox1_miraikansokubetagazou_init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1_miraikansokubetagazou_init.Font = new System.Drawing.Font("Meiryo UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.checkBox1_miraikansokubetagazou_init.Location = new System.Drawing.Point(153, 24);
+            this.checkBox1_miraikansokubetagazou_init.Name = "checkBox1_miraikansokubetagazou_init";
+            this.checkBox1_miraikansokubetagazou_init.Size = new System.Drawing.Size(184, 28);
+            this.checkBox1_miraikansokubetagazou_init.TabIndex = 73;
+            this.checkBox1_miraikansokubetagazou_init.Text = "画像のみを利用する";
+            this.checkBox1_miraikansokubetagazou_init.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2_miraikansokubetariyou_init
+            // 
+            this.checkBox2_miraikansokubetariyou_init.AutoSize = true;
+            this.checkBox2_miraikansokubetariyou_init.Checked = true;
+            this.checkBox2_miraikansokubetariyou_init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2_miraikansokubetariyou_init.Font = new System.Drawing.Font("Meiryo UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.checkBox2_miraikansokubetariyou_init.Location = new System.Drawing.Point(40, 24);
+            this.checkBox2_miraikansokubetariyou_init.Name = "checkBox2_miraikansokubetariyou_init";
+            this.checkBox2_miraikansokubetariyou_init.Size = new System.Drawing.Size(84, 28);
+            this.checkBox2_miraikansokubetariyou_init.TabIndex = 74;
+            this.checkBox2_miraikansokubetariyou_init.Text = "ご利用";
+            this.checkBox2_miraikansokubetariyou_init.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(76, 302);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(486, 61);
+            this.label7.TabIndex = 77;
+            this.label7.Text = "死人が出るとくるいます。";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label8.Location = new System.Drawing.Point(94, 288);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(486, 61);
+            this.label8.TabIndex = 83;
+            this.label8.Text = "死人が出るとくるいます。";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Meiryo UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label9.Location = new System.Drawing.Point(94, 216);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(654, 61);
+            this.label9.TabIndex = 84;
+            this.label9.Text = "青線緑線の判別だけできません。";
             // 
             // dammyMain
             // 
@@ -402,6 +598,8 @@
             this.アレキビーム判定.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.未来観測β.ResumeLayout(false);
+            this.未来観測β.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -434,5 +632,19 @@
         private System.Windows.Forms.CheckBox checkBox1_arekibimugazou_init;
         private System.Windows.Forms.CheckBox checkBox1_miraikansokugazou_init;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TabPage 未来観測β;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox_未来観測位置確認ベタ;
+        private System.Windows.Forms.TextBox listBox_miraikansokubairitubeta_text_init;
+        private System.Windows.Forms.Button button1_未来観測表示位置確認ベタ;
+        public System.Windows.Forms.ComboBox listBox_miraikansokubairitubeta_init;
+        private System.Windows.Forms.TextBox textBox_miraikansokuzahyobetaY_init;
+        private System.Windows.Forms.TextBox textBox_miraikansokuzahyobetaX_init;
+        private System.Windows.Forms.CheckBox checkBox1_miraikansokubetagazou_init;
+        private System.Windows.Forms.CheckBox checkBox2_miraikansokubetariyou_init;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

@@ -69,6 +69,12 @@
     <Compile Include="DammyForm2.Designer.cs">
       <DependentUpon>DammyForm2.cs</DependentUpon>
     </Compile>
+    <Compile Include="DammyForm3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DammyForm3.Designer.cs">
+      <DependentUpon>DammyForm3.cs</DependentUpon>
+    </Compile>
     <Compile Include="dammyMain.cs">
       <SubType>UserControl</SubType>
     </Compile>
