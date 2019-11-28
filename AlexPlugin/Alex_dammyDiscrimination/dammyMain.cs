@@ -411,7 +411,7 @@ namespace Alex_dammyDiscrimination
                         }
                         /*
                         // 名誉罰
-                        else if (logInfo.logLine.Contains("489A:Unknown_489A"))
+                        else if (logInfo.logLine.Contains("489A:Unknown_489A") || logInfo.logLine.Contains("4899:Unknown_4899"))
                         {
                             名誉罰用flg = true;
                             Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::489A:Unknown_489A.*");
@@ -701,7 +701,7 @@ namespace Alex_dammyDiscrimination
                             青List.Add(logInfo.logLine);
                         }
 
-                        // ぼっちのカウントが2かつ、線が4人くっついたになった時点で、判定を行う
+                        // ぼっちのカウントが2かつ、線が2人くっついたになった時点で、判定を行う
                         if (ぼっちList.Count == 2 && 青List.Count == 1 && 緑List.Count == 1 && (紫flg || 黄色flg))
                         {
                             βStopFlg = true;
@@ -731,7 +731,7 @@ namespace Alex_dammyDiscrimination
                                 else
                                 {
                                     // その他
-                                    TTSStr = "せっしょくきんし、びーまーかーちょいうえ";
+                                    TTSStr = "せっしょくきんし、びーまーかーのちょいうえ";
                                     dammyForm3.pictureBox1.Visible = false;
                                     dammyForm3.pictureBox2.Visible = false;
                                     dammyForm3.pictureBox3.Visible = false;
@@ -773,7 +773,7 @@ namespace Alex_dammyDiscrimination
                                     if (緑List.Contains(LogMyJobName))
                                     {
                                         // 緑線
-                                        TTSStr = "とうぼうきんし、みどりせんついてる、びーまーかーのきた側";
+                                        TTSStr = "とうぼうきんし、みどりせんついてる、びーまーかーのちょいうえ";
                                         dammyForm3.pictureBox1.Visible = false;
                                         dammyForm3.pictureBox2.Visible = false;
                                         dammyForm3.pictureBox3.Visible = false;
@@ -790,7 +790,7 @@ namespace Alex_dammyDiscrimination
                                     else if (青List.Contains(LogMyJobName))
                                     {
                                         // 青線
-                                        TTSStr = "とうぼうきんし、あおせんついてる、びーまーかーのみなみ側";
+                                        TTSStr = "とうぼうきんし、あおせんついてる、びーまーかーのちょいした";
                                         dammyForm3.pictureBox1.Visible = false;
                                         dammyForm3.pictureBox2.Visible = false;
                                         dammyForm3.pictureBox3.Visible = false;
