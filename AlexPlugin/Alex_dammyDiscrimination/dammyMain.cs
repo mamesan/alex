@@ -47,7 +47,9 @@ namespace Alex_dammyDiscrimination
         private bool 黄色flg = false;
         private bool 紫flg = false;
         private List<string> ぼっちList = new List<string>();
-        private List<string> 青緑List = new List<string>();
+        private List<string> 青List = new List<string>();
+        private List<string> 緑List = new List<string>();
+        private bool 線ついたよflg = false;
 
         private bool βStopFlg = false;
 
@@ -317,8 +319,11 @@ namespace Alex_dammyDiscrimination
                     // 未来観測β用
                     黄色flg = false;
                     紫flg = false;
+                    βStopFlg = false;
+                    線ついたよflg = false;
                     ぼっちList = new List<string>();
-                    青緑List = new List<string>();
+                    青List = new List<string>();
+                    緑List = new List<string>();
 
                     formInit();
 
@@ -349,8 +354,10 @@ namespace Alex_dammyDiscrimination
                     黄色flg = false;
                     紫flg = false;
                     ぼっちList = new List<string>();
-                    青緑List = new List<string>();
+                    青List = new List<string>();
+                    緑List = new List<string>();
                     βStopFlg = false;
+                    線ついたよflg = false;
 
                     formInit();
 
@@ -645,16 +652,13 @@ namespace Alex_dammyDiscrimination
                 // -------------------------- 未来観測α --------------------------
 
                 // -------------------------- 未来観測β --------------------------
-                // 要調整
-                if (logInfo.logLine.Contains("は「未来観測β」の構え。") && false)
+                if (logInfo.logLine.Contains("は「未来観測β」の構え。"))
                 {
                     未来確定βflg = true;
                     LogMyJobName = "";
                 }
                 if (未来確定βflg)
                 {
-
-
                     // 定数が取れた場合のみ、処理に入れる
                     if (string.IsNullOrEmpty(LogMyJobName))
                     {
@@ -668,7 +672,6 @@ namespace Alex_dammyDiscrimination
                     // 定数が取れた場合のみ、処理に入れる
                     if (!string.IsNullOrEmpty(LogMyJobName) && !βStopFlg)
                     {
-
                         // 紫
                         if (logInfo.logLine.Contains(":850893:40800000:E0000000:") &&
                             logInfo.logLine.Contains(LogMyJobName))
@@ -681,28 +684,27 @@ namespace Alex_dammyDiscrimination
                         {
                             黄色flg = true;
                         }
-                         
-
 
                         // 磁石か臭い物の判定を実施
                         if (logInfo.logLine.Contains("48A3:Unknown_48A3") || logInfo.logLine.Contains("48A2: Unknown_48A2"))
                         {
                             ぼっちList.Add(logInfo.logLine);
                         }
-                        // とりあえず線ついた人を格納していく
-                        // 線はいったんよくわからなかったので保留
-                        if (logInfo.logLine.Contains("489C:Unknown_489C") || logInfo.logLine.Contains("489B:Unknown_489B"))
+                        // 緑線の格納
+                        if (logInfo.logLine.Contains(":0000:001C:"))
                         {
-                            青緑List.Add(logInfo.logLine);
+                            緑List.Add(logInfo.logLine);
                         }
-                        
-
-
-
+                        // 青線の格納
+                        if (logInfo.logLine.Contains(":0000:001D:"))
+                        {
+                            青List.Add(logInfo.logLine);
+                        }
 
                         // ぼっちのカウントが2かつ、線が4人くっついたになった時点で、判定を行う
-                        if (ぼっちList.Count == 2 && 青緑List.Count == 4)
+                        if (ぼっちList.Count == 2 && 青List.Count == 1 && 緑List.Count == 1 && (紫flg || 黄色flg))
                         {
+                            βStopFlg = true;
                             dammyForm3.Show();
                             string TTSStr = "";
 
@@ -768,11 +770,10 @@ namespace Alex_dammyDiscrimination
                                 else
                                 {
                                     // 逃亡禁止命令
-                                    if (青緑List.Contains(LogMyJobName))
+                                    if (緑List.Contains(LogMyJobName))
                                     {
-                                        // 何かしらの線がついた人
-                                        // その他
-                                        TTSStr = "とうぼうきんし、どっちかの色、びーまーかー上下どちらか";
+                                        // 緑線
+                                        TTSStr = "とうぼうきんし、みどりせんついてる、びーまーかーのきた側";
                                         dammyForm3.pictureBox1.Visible = false;
                                         dammyForm3.pictureBox2.Visible = false;
                                         dammyForm3.pictureBox3.Visible = false;
@@ -786,6 +787,23 @@ namespace Alex_dammyDiscrimination
                                         dammyForm3.pictureBox11.Visible = false;
                                         dammyForm3.pictureBox12.Visible = false;
                                     } 
+                                    else if (青List.Contains(LogMyJobName))
+                                    {
+                                        // 青線
+                                        TTSStr = "とうぼうきんし、あおせんついてる、びーまーかーのみなみ側";
+                                        dammyForm3.pictureBox1.Visible = false;
+                                        dammyForm3.pictureBox2.Visible = false;
+                                        dammyForm3.pictureBox3.Visible = false;
+                                        dammyForm3.pictureBox4.Visible = false;
+                                        dammyForm3.pictureBox5.Visible = false;
+                                        dammyForm3.pictureBox6.Visible = false;
+                                        dammyForm3.pictureBox7.Visible = false;
+                                        dammyForm3.pictureBox8.Visible = false;
+                                        dammyForm3.pictureBox9.Visible = false;
+                                        dammyForm3.pictureBox10.Visible = false;
+                                        dammyForm3.pictureBox11.Visible = false;
+                                        dammyForm3.pictureBox12.Visible = false;
+                                    }
                                     else
                                     {
                                         // 無職
@@ -811,24 +829,6 @@ namespace Alex_dammyDiscrimination
                                 ActGlobals.oFormActMain.TTS(TTSStr);
                             }
                         }
-
-
-
-
-                        // 加重罰
-                        /*
-                        else if (logInfo.logLine.Contains("48A5:Unknown_48A5"))
-                        {
-                            Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::48A5:Unknown_48A5.*");
-                            加重罰List.Add(regex.Replace(logInfo.logLine, "$1"));
-                        }
-                        */
-
-
-
-
-
-
                     }
                     // ダミーアレキ判定用
                     if (logInfo.logLine.Contains("489E:Unknown_489E"))
@@ -945,6 +945,15 @@ namespace Alex_dammyDiscrimination
                     {
                         βStopFlg = false;
                         未来確定βflg = false;
+
+                        ぼっちList = new List<string>();
+                        青List = new List<string>();
+                        緑List = new List<string>();
+                        黄色flg = false;
+                        紫flg = false;
+                        LogMyJobName = "";
+                        線ついたよflg = false;
+
                         dammyForm.Hide();
                         dammyForm3.Hide();
                     }
