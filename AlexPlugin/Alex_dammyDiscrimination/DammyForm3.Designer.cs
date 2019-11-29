@@ -58,6 +58,7 @@
             // pictureBox6
             // 
             this.pictureBox6.ErrorImage = null;
+            this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
             this.pictureBox6.InitialImage = null;
             this.pictureBox6.Location = new System.Drawing.Point(3, 1);
             this.pictureBox6.Name = "pictureBox6";

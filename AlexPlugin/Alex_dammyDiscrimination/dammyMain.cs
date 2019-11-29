@@ -21,7 +21,7 @@ namespace Alex_dammyDiscrimination
         // 未来観測α設定用の変数
         private bool 未来確定αflg = false;
         private bool 未来確定βflg = false;
-        private string MyJobName = "";
+        private string MyName = "";
         private string LogMyJobName = "";
         private Dictionary<int, string> dammyAlex = new Dictionary<int, string>();
         private Dictionary<int, string> dammyAlex2 = new Dictionary<int, string>();
@@ -42,6 +42,7 @@ namespace Alex_dammyDiscrimination
 
         private bool αStopFlg = false;
         private bool 名誉罰用flg = false;
+        private string 名誉mobNumber = "";
 
         // β用フラグ
         private bool 黄色flg = false;
@@ -298,7 +299,7 @@ namespace Alex_dammyDiscrimination
                 {
                     // 戦闘前の初期処理
                     initButtoleFlg = true;
-                    MyJobName = ActHelper.MyJob();
+                    MyName = ActHelper.MyName();
                     //MyJobName = textBox1_job_init.Text;
 
                     // 未来観測α用
@@ -315,6 +316,7 @@ namespace Alex_dammyDiscrimination
                     行動命令flg = false;
                     名誉罰用flg = false;
                     αStopFlg = false;
+                    名誉mobNumber = "";
 
                     // 未来観測β用
                     黄色flg = false;
@@ -348,6 +350,7 @@ namespace Alex_dammyDiscrimination
                     行動命令flg = false;
                     名誉罰用flg = false;
                     αStopFlg = false;
+                    名誉mobNumber = "";
                     initButtoleFlg = false;
 
                     // 未来観測β用
@@ -374,7 +377,7 @@ namespace Alex_dammyDiscrimination
                     // 定数が取れた場合のみ、処理に入れる
                     if (string.IsNullOrEmpty(LogMyJobName))
                     {
-                        Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: Whm Level: 80 .*");
+                        Regex regex = new Regex(@"^.*:" + MyName + ":([A-Z0-9]{8})::0000:.*");
                         if (regex.IsMatch(logInfo.logLine))
                         {
                             LogMyJobName = regex.Replace(logInfo.logLine, "$1");
@@ -409,28 +412,26 @@ namespace Alex_dammyDiscrimination
                             Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::48A5:Unknown_48A5.*");
                             加重罰List.Add(regex.Replace(logInfo.logLine, "$1"));
                         }
-                        /*
+
+
+
+                        // 名誉罰用
+                        if (logInfo.logLine.Contains("48A4:Unknown_48A4"))
+                        {
+                            Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::48A4:Unknown_48A4:.*");
+                            名誉mobNumber = regex.Replace(logInfo.logLine, "$1");
+                        }
+
                         // 名誉罰
-                        else if (logInfo.logLine.Contains("489A:Unknown_489A") || logInfo.logLine.Contains("4899:Unknown_4899"))
+                        if ((logInfo.logLine.Contains("489A:Unknown_489A") || logInfo.logLine.Contains("4899:Unknown_4899")) &&
+                            logInfo.logLine.Contains(名誉mobNumber))
                         {
                             名誉罰用flg = true;
-                            Regex regex = new Regex(@"^.*15:([A-Z0-9]{8})::489A:Unknown_489A.*");
-                            string targetJobLog = regex.Replace(logInfo.logLine, "$1");
-                            if (!集団罰List.Contains(targetJobLog) || !加重罰List.Contains(targetJobLog))
-                            {
-                                名誉罰List.Add(targetJobLog);
-                                αStopFlg = true;
-                            }
+                            名誉罰List.Add(logInfo.logLine);
                         }
-                        else if (名誉罰用flg)
-                        {
-                            名誉罰用flg = false;
-                            αStopFlg = true;
-                        }
-                        */
 
                         // 集団罰・加重罰が付いた場合は、即処理を中断する
-                        if (集団罰List.Count == 1 && 加重罰List.Count == 3 && (停止命令flg || 行動命令flg))
+                        if (集団罰List.Count == 1 && 加重罰List.Count == 3 && 名誉罰List.Count == 1 && (停止命令flg || 行動命令flg))
                         {
                             αStopFlg = true;
                         }
@@ -442,10 +443,9 @@ namespace Alex_dammyDiscrimination
                             dammyForm2.Show();
                             if (停止命令flg)
                             {
-                                TTSString = "とまれー、";
+                                TTSString = "さいしょとまれー、";
                                 dammyForm2.pictureBox1.Visible = false;
                                 dammyForm2.pictureBox2.Visible = true;
-                                dammyForm2.pictureBox6.Visible = false;
                                 dammyForm2.pictureBox7.Visible = false;
                                 dammyForm2.pictureBox8.Visible = false;
                                 dammyForm2.pictureBox9.Visible = false;
@@ -455,10 +455,9 @@ namespace Alex_dammyDiscrimination
                             }
                             else if (行動命令flg)
                             {
-                                TTSString = "うごけー、";
+                                TTSString = "さいしょうごけー、";
                                 dammyForm2.pictureBox1.Visible = true;
                                 dammyForm2.pictureBox2.Visible = false;
-                                dammyForm2.pictureBox6.Visible = false;
                                 dammyForm2.pictureBox7.Visible = false;
                                 dammyForm2.pictureBox8.Visible = false;
                                 dammyForm2.pictureBox9.Visible = false;
@@ -497,13 +496,27 @@ namespace Alex_dammyDiscrimination
                                 dammyForm2.pictureBox12.Visible = false;
                             }
                             // 自分が名誉罰の場合の処理
-                            else
+                            else if (名誉罰List.Contains(LogMyJobName))
                             {
-                                TTSString += "めいよかむしょく";
+                                TTSString += "めいよばつ";
                                 dammyForm2.pictureBox3.Visible = true; // 名誉
                                 dammyForm2.pictureBox4.Visible = false;
                                 dammyForm2.pictureBox5.Visible = false;
                                 dammyForm2.pictureBox6.Visible = false;　// 無色
+                                dammyForm2.pictureBox7.Visible = false;
+                                dammyForm2.pictureBox8.Visible = false;
+                                dammyForm2.pictureBox9.Visible = false;
+                                dammyForm2.pictureBox10.Visible = false;
+                                dammyForm2.pictureBox11.Visible = false;
+                                dammyForm2.pictureBox12.Visible = false;
+                            }
+                            else
+                            {
+                                TTSString += "むしょく";
+                                dammyForm2.pictureBox3.Visible = false; // 名誉
+                                dammyForm2.pictureBox4.Visible = false;
+                                dammyForm2.pictureBox5.Visible = false;
+                                dammyForm2.pictureBox6.Visible = true;　// 無色
                                 dammyForm2.pictureBox7.Visible = false;
                                 dammyForm2.pictureBox8.Visible = false;
                                 dammyForm2.pictureBox9.Visible = false;
@@ -646,6 +659,7 @@ namespace Alex_dammyDiscrimination
                         停止命令flg = false;
                         行動命令flg = false;
                         LogMyJobName = "";
+                        名誉mobNumber = "";
                     }
                 }
 
@@ -662,7 +676,7 @@ namespace Alex_dammyDiscrimination
                     // 定数が取れた場合のみ、処理に入れる
                     if (string.IsNullOrEmpty(LogMyJobName))
                     {
-                        Regex regex = new Regex(@"^.*03:([A-Z0-9]{8}):Added new combatant.*  Job: Whm Level: 80 .*");
+                        Regex regex = new Regex(@"^.*:" + MyName + ":([A-Z0-9]{8})::0000:.*");
                         if (regex.IsMatch(logInfo.logLine))
                         {
                             LogMyJobName = regex.Replace(logInfo.logLine, "$1");
@@ -753,7 +767,7 @@ namespace Alex_dammyDiscrimination
                                 if (ぼっちList.Contains(LogMyJobName))
                                 {
                                     // 逃亡監察命令
-                                    TTSStr = "とうぼうかんし、びーまーかーじょう";
+                                    TTSStr = "とうぼうかんさつ、びーまーかーじょう";
                                     dammyForm3.pictureBox1.Visible = false;
                                     dammyForm3.pictureBox2.Visible = true;
                                     dammyForm3.pictureBox3.Visible = false;
@@ -776,10 +790,10 @@ namespace Alex_dammyDiscrimination
                                         TTSStr = "とうぼうきんし、みどりせんついてる、びーまーかーのちょいうえ";
                                         dammyForm3.pictureBox1.Visible = false;
                                         dammyForm3.pictureBox2.Visible = false;
-                                        dammyForm3.pictureBox3.Visible = true;
+                                        dammyForm3.pictureBox3.Visible = false;
                                         dammyForm3.pictureBox4.Visible = false;
                                         dammyForm3.pictureBox5.Visible = false;
-                                        dammyForm3.pictureBox6.Visible = false;
+                                        dammyForm3.pictureBox6.Visible = true;
                                         dammyForm3.pictureBox7.Visible = false;
                                         dammyForm3.pictureBox8.Visible = false;
                                         dammyForm3.pictureBox9.Visible = false;
