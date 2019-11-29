@@ -56,6 +56,7 @@ namespace Alex_dammyDiscrimination
 
         // 聖なる大審判
         private bool 大審判flg = false;
+        private bool 大審判stopflg = false;
         private Dictionary<int, string> 大審判List = new Dictionary<int, string>();
         private int i1 = 0;
         private int i2 = 0;
@@ -435,7 +436,7 @@ namespace Alex_dammyDiscrimination
                     // 定数が取れた場合のみ、処理に入れる
                     if (string.IsNullOrEmpty(LogMyJobName) && checkBox1_miraikansokucheck_init.Checked)
                     {
-                        Regex regex = new Regex(@"^.*:" + MyName + ":([A-Z0-9]{8})::0000:.*");
+                        Regex regex = new Regex(@"^.*:Mame San:([A-Z0-9]{8})::0000:.*");
                         if (regex.IsMatch(logInfo.logLine))
                         {
                             LogMyJobName = regex.Replace(logInfo.logLine, "$1");
@@ -734,7 +735,7 @@ namespace Alex_dammyDiscrimination
                     // 定数が取れた場合のみ、処理に入れる
                     if (string.IsNullOrEmpty(LogMyJobName) && checkBox2_miraikansokubetariyou_init.Checked)
                     {
-                        Regex regex = new Regex(@"^.*:" + MyName + ":([A-Z0-9]{8})::0000:.*");
+                        Regex regex = new Regex(@"^.*:Mame San:([A-Z0-9]{8})::0000:.*");
                         if (regex.IsMatch(logInfo.logLine))
                         {
                             LogMyJobName = regex.Replace(logInfo.logLine, "$1");
@@ -1051,14 +1052,14 @@ namespace Alex_dammyDiscrimination
                     dammyForm4.pictureBox11.Visible = false;
                     dammyForm4.pictureBox12.Visible = false;
                     dammyForm4.Show();
-
                 }
 
                 // 聖なる大審判を利用する際に発動する
                 if (大審判flg)
                 {
                     if (logInfo.logLine.Contains("聖なる大審判") &&
-                        !logInfo.logLine.Contains("starts using 聖なる大審判 on ."))
+                        !logInfo.logLine.Contains("starts using 聖なる大審判 on .") &&
+                        (i1 == 0 || i2 == 0))
                     {
                         foreach (KeyValuePair<int, string> pair in 大審判List)
                         {
@@ -1067,10 +1068,12 @@ namespace Alex_dammyDiscrimination
                                 if (i1 == 0)
                                 {
                                     i1 = pair.Key;
+                                    break;
                                 }
                                 else if (i2 == 0)
                                 {
                                     i2 = pair.Key;
+                                    break;
                                 }
                             }
                         }
@@ -1193,7 +1196,7 @@ namespace Alex_dammyDiscrimination
                         }
 
                         // 読み上げ
-                        if (!checkBox2_daitinnpan_init.Checked)
+                        if (!checkBox1_daitinnpangazou_init.Checked)
                         {
                             ActGlobals.oFormActMain.TTS(TTSStrig);
                         }
@@ -1225,8 +1228,6 @@ namespace Alex_dammyDiscrimination
                             dammyForm4.pictureBox10.Visible = false;
                             dammyForm4.pictureBox11.Visible = false;
                             dammyForm4.pictureBox12.Visible = false;
-
-
                         }
                         else
                         {
