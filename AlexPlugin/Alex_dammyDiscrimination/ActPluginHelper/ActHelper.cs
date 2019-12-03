@@ -175,6 +175,58 @@
             return result;
         }
 
+
+        public static List<Combatant> GetCombatantListDummy()
+        {
+            var result = new List<Combatant>();
+            if (Initialize())
+            {
+                if (DataRepository.GetCurrentFFXIVProcess().ProcessName == null)
+                {
+                    return result;
+                }
+                dynamic list = DataRepository.GetCombatantList();
+                foreach (dynamic item in list)
+                {
+                    if (item == null)
+                    {
+                        continue;
+                    }
+
+                    var combatant = new Combatant();
+
+                    string name = (string)item.Name;
+                    if (string.IsNullOrWhiteSpace(name))
+                    {
+                        name = "";
+                    }
+                    if ((int)item.CastTargetID == 0 || !string.IsNullOrWhiteSpace(name))
+                    {
+                        continue;
+                    }
+                    combatant.Name = name;
+                    combatant.ID = (uint)item.ID;
+                    combatant.Job = (int)item.Job;
+                    combatant.CurrentMP = (int)item.CurrentMP;
+                    combatant.MaxMP = (int)item.MaxMP;
+                    combatant.IsCasting = (bool)item.IsCasting;
+                    combatant.OwnerID = (uint)item.OwnerID;
+                    combatant.Name = (string)item.Name;
+                    combatant.type = (byte)item.type;
+                    combatant.Level = (int)item.Level;
+                    combatant.CurrentHP = (int)item.CurrentHP;
+                    combatant.MaxHP = (int)item.MaxHP;
+                    combatant.CurrentTP = (int)item.CurrentTP;
+                    combatant.PosX = (float)item.PosX;
+                    combatant.PosY = (float)item.PosY;
+                    combatant.PosZ = (float)item.PosZ;
+
+                    result.Add(combatant);
+                }
+            }
+            return result;
+        }
+
         public static List<Combatant> GetMobList()
         {
             var result = new List<Combatant>();

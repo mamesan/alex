@@ -57,7 +57,7 @@ namespace Alex_dammyDiscrimination
         // 聖なる大審判
         private bool 大審判flg = false;
         private bool 大審判stopflg = false;
-        private Dictionary<int, string> 大審判List = new Dictionary<int, string>();
+        private Dictionary<int, string[]> 大審判List = new Dictionary<int, string[]>();
         private int i1 = 0;
         private int i2 = 0;
         private int icount = 0;
@@ -139,10 +139,17 @@ namespace Alex_dammyDiscrimination
             dammyList.Add(3);
             dammyList.Add(4);
 
-            大審判List = new Dictionary<int, string>();
-            大審判List.Add(1, ":116:116:");
-            大審判List.Add(2, ":84:108:");
-            大審判List.Add(3, ":100:116:");
+            大審判List = new Dictionary<int, string[]>();
+
+            // 1番目
+            string[] 子大審判List1 = { "84,84" ,"84,116", "92,100", "92,108", "100,100", "108,92" , "108,100", "116,84" , "116,116"};
+            // 2番目
+            string[] 子大審判List2 = { "84,108", "84,92", "92,92" , "92,116", "100,84" , "100,108", "108,116", "116,100" };
+            // 3番目
+            string[] 子大審判List3 = { "84,100", "92,84", "108,84", "100,92", "100,116", "108,108", "116,92" , "116,108" };
+            大審判List.Add(1, 子大審判List1);
+            大審判List.Add(2, 子大審判List2);
+            大審判List.Add(3, 子大審判List3);
 
             dammy拝火 = 0;
 
@@ -379,6 +386,16 @@ namespace Alex_dammyDiscrimination
                     i1 = 0;
                     i2 = 0;
                     icount = 0;
+                    大審判List = new Dictionary<int, string[]>();
+                    // 1番目
+                    string[] 子大審判List1 = { "84,84", "84,116", "92,100", "92,108", "100,100", "108,92", "108,100", "116,84", "116,116" };
+                    // 2番目
+                    string[] 子大審判List2 = { "84,108", "84,92", "92,92", "92,116", "100,84", "100,108", "108,116", "116,100" };
+                    // 3番目
+                    string[] 子大審判List3 = { "84,100", "92,84", "108,84", "100,92", "100,116", "108,108", "116,92", "116,108" };
+                    大審判List.Add(1, 子大審判List1);
+                    大審判List.Add(2, 子大審判List2);
+                    大審判List.Add(3, 子大審判List3);
 
                     formInit();
 
@@ -420,6 +437,16 @@ namespace Alex_dammyDiscrimination
                     i1 = 0;
                     i2 = 0;
                     icount = 0;
+                    大審判List = new Dictionary<int, string[]>();
+                    // 1番目
+                    string[] 子大審判List1 = { "84,84", "84,116", "92,100", "92,108", "100,100", "108,92", "108,100", "116,84", "116,116" };
+                    // 2番目
+                    string[] 子大審判List2 = { "84,108", "84,92", "92,92", "92,116", "100,84", "100,108", "108,116", "116,100" };
+                    // 3番目
+                    string[] 子大審判List3 = { "84,100", "92,84", "108,84", "100,92", "100,116", "108,108", "116,92", "116,108" };
+                    大審判List.Add(1, 子大審判List1);
+                    大審判List.Add(2, 子大審判List2);
+                    大審判List.Add(3, 子大審判List3);
 
                     formInit();
 
@@ -1052,32 +1079,25 @@ namespace Alex_dammyDiscrimination
                     dammyForm4.pictureBox11.Visible = false;
                     dammyForm4.pictureBox12.Visible = false;
                     dammyForm4.Show();
+
+                    // 初期化
+                    大審判List = new Dictionary<int, string[]>();
+                    // 1番目
+                    string[] 子大審判List1 = { "84,84", "84,116", "92,100", "92,108", "100,100", "108,92", "108,100", "116,84", "116,116" };
+                    // 2番目
+                    string[] 子大審判List2 = { "84,108", "84,92", "92,92", "92,116", "100,84", "100,108", "108,116", "116,100" };
+                    // 3番目
+                    string[] 子大審判List3 = { "84,100", "92,84", "108,84", "100,92", "100,116", "108,108", "116,92", "116,108" };
+                    大審判List.Add(1, 子大審判List1);
+                    大審判List.Add(2, 子大審判List2);
+                    大審判List.Add(3, 子大審判List3);
+
+                    Task.Run(() => Checkdummy());
                 }
 
                 // 聖なる大審判を利用する際に発動する
                 if (大審判flg)
                 {
-                    if (logInfo.logLine.Contains("聖なる大審判") &&
-                        !logInfo.logLine.Contains("starts using 聖なる大審判 on .") &&
-                        (i1 == 0 || i2 == 0))
-                    {
-                        foreach (KeyValuePair<int, string> pair in 大審判List)
-                        {
-                            if (logInfo.logLine.Contains(pair.Value))
-                            {
-                                if (i1 == 0)
-                                {
-                                    i1 = pair.Key;
-                                    break;
-                                }
-                                else if (i2 == 0)
-                                {
-                                    i2 = pair.Key;
-                                    break;
-                                }
-                            }
-                        }
-                    }
 
                     // i2が0じゃない場合のみ、処理を実施する
                     if (i2 != 0)
@@ -1203,50 +1223,103 @@ namespace Alex_dammyDiscrimination
                     }
 
 
-                    if (i2 != 0 && logInfo.logLine.Contains("聖なる大審判"))
+                    if (logInfo.logLine.Contains("パーフェクト・アレキサンダーの「連帯刑」"))
                     {
-                        // 24回より多くなったら
-                        if (icount >= 20)
-                        {
-                            // 処理を終了する
-                            // 大審判用
-                            大審判flg = false;
-                            i1 = 0;
-                            i2 = 0;
-                            icount = 0;
+                        // 大審判用
+                        大審判flg = false;
+                        i1 = 0;
+                        i2 = 0;
+                        icount = 0;
 
-                            dammyForm4.Hide();
-                            dammyForm4.pictureBox1.Visible = false;
-                            dammyForm4.pictureBox2.Visible = false;
-                            dammyForm4.pictureBox3.Visible = false;
-                            dammyForm4.pictureBox4.Visible = false;
-                            dammyForm4.pictureBox5.Visible = false;
-                            dammyForm4.pictureBox6.Visible = false;
-                            dammyForm4.pictureBox7.Visible = false;
-                            dammyForm4.pictureBox8.Visible = false;
-                            dammyForm4.pictureBox9.Visible = false;
-                            dammyForm4.pictureBox10.Visible = false;
-                            dammyForm4.pictureBox11.Visible = false;
-                            dammyForm4.pictureBox12.Visible = false;
-                        }
-                        else
-                        {
-                            icount++;
-                        }
+                        dammyForm4.Hide();
+                        dammyForm4.pictureBox1.Visible = false;
+                        dammyForm4.pictureBox2.Visible = false;
+                        dammyForm4.pictureBox3.Visible = false;
+                        dammyForm4.pictureBox4.Visible = false;
+                        dammyForm4.pictureBox5.Visible = false;
+                        dammyForm4.pictureBox6.Visible = false;
+                        dammyForm4.pictureBox7.Visible = false;
+                        dammyForm4.pictureBox8.Visible = false;
+                        dammyForm4.pictureBox9.Visible = false;
+                        dammyForm4.pictureBox10.Visible = false;
+                        dammyForm4.pictureBox11.Visible = false;
+                        dammyForm4.pictureBox12.Visible = false;
+
                     }
                 }
-
-
-
-
-
-
 
                 // -------------------------- 聖なる大審判 --------------------------
             }
             catch (Exception)
             {
                 // 例外は全て握りつぶす
+            }
+        }
+
+
+        /// <summary>
+        /// 大審判用非同期処理
+        /// </summary>
+        private void Checkdummy()
+        {
+            // 強制的に回し続ける
+            bool stopFlg = false;
+            while (!stopFlg)
+            {
+                List<Combatant> combatantsList = ActHelper.GetCombatantListDummy();
+
+                Combatant TargetCombatant = null;
+                foreach (Combatant com in combatantsList)
+                {
+                    // 名前が空・キャスト中・HPが44・レベル1の場合のみ
+                    if (string.IsNullOrWhiteSpace(com.Name) && com.IsCasting && com.CurrentHP == 44)
+                    {
+                        TargetCombatant = com;
+                        break;
+                    }
+                }
+
+
+                if (TargetCombatant != null)
+                {
+                    if (i1 == 0 || i2 == 0)
+                    {
+                        new Action(() =>
+                        {
+                            foreach (KeyValuePair<int, string[]> pair in 大審判List)
+                            {
+                                string X = TargetCombatant.PosX.ToString();
+                                string Y = TargetCombatant.PosY.ToString();
+
+                                int stopcheck = i1;
+
+                                foreach (string pos in pair.Value)
+                                {
+
+                                    string[] M = pos.Split(',');
+                                    string MX = M[0];
+                                    string MY = M[1];
+
+                                    if (MX.Equals(X) && MY.Equals(Y))
+                                    {
+                                        if (i1 == 0)
+                                        {
+                                            i1 = pair.Key;
+                                            大審判List.Remove(pair.Key);
+                                            return;
+                                        }
+                                        else if (i2 == 0)
+                                        {
+                                            i2 = pair.Key;
+                                            stopFlg = true;
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        })();
+                    }
+                }
             }
         }
 
