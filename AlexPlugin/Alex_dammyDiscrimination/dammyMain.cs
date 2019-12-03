@@ -89,7 +89,10 @@ namespace Alex_dammyDiscrimination
             dammyForm.Close();
             dammyForm2.Hide();
             dammyForm2.Close();
-
+            dammyForm3.Hide();
+            dammyForm3.Close();
+            dammyForm4.Hide();
+            dammyForm4.Close();
         }
 
         public void InitPlugin(TabPage pluginScreenSpace, Label pluginStatusText)
@@ -1098,7 +1101,6 @@ namespace Alex_dammyDiscrimination
                 // 聖なる大審判を利用する際に発動する
                 if (大審判flg)
                 {
-
                     // i2が0じゃない場合のみ、処理を実施する
                     if (i2 != 0)
                     {
