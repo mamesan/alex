@@ -614,6 +614,9 @@ namespace Alex_dammyDiscrimination
                                 dammyForm2.pictureBox12.Visible = false;
                             }
 
+                            αStopFlg = false;
+                            LogMyJobName = "";
+
                             if (!checkBox1_miraikansokugazou_init.Checked)
                             {
                                 ActGlobals.oFormActMain.TTS(TTSString);
@@ -758,6 +761,7 @@ namespace Alex_dammyDiscrimination
                 if (logInfo.logLine.Contains("は「未来観測β」の構え。"))
                 {
                     未来確定βflg = true;
+                    βStopFlg = false;
                     LogMyJobName = "";
                 }
                 if (未来確定βflg)
